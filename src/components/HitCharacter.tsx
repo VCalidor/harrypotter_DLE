@@ -41,7 +41,7 @@ const HitCharacter = ({
             borderRadius={4}
             width={100}
             height={90}
-            src={chosenCharacter.img}
+            src={chosenCharacter.image}
             alt={chosenCharacter.name}
           />
           <Center
@@ -61,9 +61,9 @@ const HitCharacter = ({
               <Text color={"black"} margin={"0"} fontSize={12}>
                 {chosenCharacter.name}
               </Text>
-              {chosenCharacter.alias && (
+              {chosenCharacter.alternate_names.length > 0 && (
                 <Text color={"black"} margin={"0"} fontSize={8}>
-                  {chosenCharacter.alias}
+                  {chosenCharacter.alternate_names[0]}
                 </Text>
               )}
             </Box>
