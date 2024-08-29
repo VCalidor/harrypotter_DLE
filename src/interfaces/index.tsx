@@ -1,14 +1,19 @@
 export interface Character {
+  id: number;
   name: string;
-  alias?: string;
-  gender: string[];
+  alternate_names: string[];
   species: string[];
-  birth_year: string[] | number[];
+  gender: string[];
   house: string[];
-  atributes: string[];
-  filiations: string[];
-  first_appearance: string[];
-  alive: boolean;
+  birth_year: string[] | number[];
+  ancestry: string[];
+  magical_attributes: string[];
+  eye_colour: string[];
+  hair_colour: string[];
   wand: string[];
-  img: string;
+  affiliations: string[];
+  patronus: string[];
+  alive: boolean;
+  first_appearance: string[];
+  image: string;
 }

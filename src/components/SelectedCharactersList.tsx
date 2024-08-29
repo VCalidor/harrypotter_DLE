@@ -5,11 +5,12 @@ import { Character } from "../interfaces";
 
 const atributes = [
   "Personagem",
-  "Genero",
   "Especie",
-  "Ano de Nascimento",
+  "Genero",
   "Casa",
-  "Atributos",
+  "Ano de Nascimento",
+  "Ancestralidade",
+  "Atributos Mágicos",
   "Afiliações",
   "Primeira Aparição",
 ];

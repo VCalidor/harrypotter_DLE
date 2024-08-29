@@ -8,7 +8,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { BsInfoCircle, BsFillBarChartFill } from "react-icons/bs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import CharacterInput from "./components/CharacterInput";
 import SelectedCharactersList from "./components/SelectedCharactersList";
@@ -17,20 +17,6 @@ import HitCharacter from "./components/HitCharacter";
 import Tips from "./components/Tips";
 import { Character } from "./interfaces";
 
-const chosenCharacter = {
-  name: "Nagini",
-  gender: ["Mulher"],
-  species: ["Humano", "Cobra"],
-  birth_year: [1927],
-  house: ["Não tem"],
-  first_appearance: ["O Cálice de Fogo"],
-  atributes: ["Maledictus"],
-  filiations: ["Comensais da Morte", "Horcrux"],
-  img: "https://kanto.legiaodosherois.com.br/w760-h398-cfill/wp-content/uploads/2018/10/legiao_bpS3qJBPVRzyYHLQdhK_fr8ZseX910AG6WTxkMiCnU.jpg.webp",
-  alive: false,
-  wand: ["Não Tem"],
-};
-
 function App() {
   const [input, setInput] = useState("");
   const [selectedCharacters, setSelectedCharacters] = useState<Character[]>([]);
@@ -38,6 +24,50 @@ function App() {
     useState<Character | null>(null);
   const [animate, setAnimate] = useState(false);
   const [hit, setHit] = useState(false);
+  const [chosenCharacter, setChosenCharacter] = useState<Character>({
+    id: 99999,
+    name: "",
+    alternate_names: [],
+    species: [],
+    gender: [],
+    house: [],
+    birth_year: [],
+    ancestry: [],
+    magical_attributes: [],
+    eye_colour: [],
+    hair_colour: [],
+    wand: [],
+    affiliations: [],
+    patronus: [],
+    alive: false,
+    first_appearance: [],
+    image: "",
+  });
+
+  useEffect(() => {
+    getChosenCharacter();
+  }, []);
+
+  const getChosenCharacter = async () => {
+    try {
+      const response = await fetch(
+        "https://harrypotterdleapi-07b4bbf3528e.herokuapp.com/api/characters/select-random",
+        {
+          method: "GET",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data: Character = await response.json();
+
+      setChosenCharacter(data);
+    } catch (error) {
+      console.error("Erro ao buscar os personagens:", error);
+    }
+  };
 
   return (
     <>

@@ -16,7 +16,6 @@ const CharacterImageCard = ({
   useEffect(() => {
     if (isNew) {
       setOpacity(1);
-      setTimeout(() => {}, 750);
     }
   }, []);
 
@@ -28,7 +27,7 @@ const CharacterImageCard = ({
       borderRadius={4}
       width={100}
       height={90}
-      transition={".75s"}
+      transition={".7s"}
       opacity={opacity}
       transform={`scale(${opacity})`}
     >

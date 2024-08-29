@@ -12,213 +12,6 @@ import { BsSend } from "react-icons/bs";
 
 import { Character } from "../interfaces";
 
-const characters = [
-  {
-    name: "Luna Lovegood",
-    gender: ["Mulher"],
-    species: ["Humano"],
-    birth_year: ["1981"],
-    house: ["Lufa-Lufa"],
-    first_appearance: ["O Enigma do Principe"],
-    atributes: ["Bruxo"],
-    filiations: ["Hogwarts", "Armada de Dumbledore"],
-    img: "https://pm1.aminoapps.com/6537/3f6ab6249cdeee1173fbc07150f16d120055c828_00.jpg",
-    alive: true,
-    wand: ["Desconhecido"],
-  },
-  {
-    name: "Harry potter",
-    alias: "O menino que sobreviveu",
-    gender: ["Homem"],
-    species: ["Humano"],
-    birth_year: [1980],
-    house: ["Grifinória"],
-    first_appearance: ["A Pedra Filosofal"],
-    atributes: ["Bruxo", "Ofidioglota", "Horcrux"],
-    filiations: ["Hogwarts", "Armada de Dumbledore", "Ordem da Fênix"],
-    img: "https://qph.cf2.quoracdn.net/main-qimg-79eefb9bb665b1df964ff1f6475b1d7c-pjlq",
-    alive: true,
-    wand: ["Desconhecido"],
-  },
-  {
-    name: "Ronald Weasley",
-    alias: "Rony",
-    gender: ["Homem"],
-    species: ["Humano"],
-    birth_year: [1980],
-    house: ["Grifinória"],
-    first_appearance: ["Pedra Filosofal"],
-    atributes: ["Bruxo"],
-    filiations: ["Ordem da Fênix", "Armada de Dumbledore", "Hogwarts"],
-    img: "https://i.pinimg.com/originals/77/19/30/771930f96c2678314a5c6d50c1679a9e.jpg",
-    alive: true,
-    wand: ["Desconhecido"],
-  },
-  {
-    name: "Sirius Black",
-    gender: ["Homem"],
-    species: ["Humano"],
-    birth_year: [1958],
-    house: ["Grifinória"],
-    first_appearance: ["O Prisioneiro de Azkaban"],
-    atributes: ["Bruxo", "Animago"],
-    filiations: ["Hogwarts", "Ordem da Fênix", "Os Marotos"],
-    img: "https://upload.wikimedia.org/wikipedia/en/6/6b/Sirius_Black.jpeg",
-    alive: false,
-    wand: ["Desconhecido"],
-  },
-  {
-    name: "Rabo Córneo Húngaro",
-    gender: ["Homem"],
-    species: ["Dragão"],
-    birth_year: [1946],
-    house: ["Não tem"],
-    first_appearance: ["O Cálice de Fogo"],
-    atributes: ["Criatura Mágica"],
-    filiations: ["Não tem"],
-    img: "https://hogwartshabbletneville.weebly.com/uploads/1/2/9/2/12922768/934123404.png",
-    alive: true,
-    wand: ["Desconhecido"],
-  },
-  {
-    name: "Tom Riddle",
-    alias: "Lord Voldemort",
-    gender: ["Homem"],
-    species: ["Humano"],
-    birth_year: [1953],
-    house: ["Sonserina"],
-    first_appearance: ["A Câmara Secreta"],
-    atributes: ["Bruxo", "Ofidioglota"],
-    filiations: ["Comensais da Morte", "Hogwarts"],
-    img: "https://i.pinimg.com/736x/ba/88/af/ba88af69441f056d05c1210755d4bae3.jpg",
-    alive: false,
-    wand: ["Desconhecido"],
-  },
-  {
-    name: "Monstro",
-    gender: ["Homem"],
-    species: ["Elfo Doméstico"],
-    birth_year: [1935],
-    house: ["Não tem"],
-    first_appearance: ["O Cálice de Fogo"],
-    atributes: ["Criatura Mágica"],
-    filiations: ["Não tem"],
-    img: "https://qph.cf2.quoracdn.net/main-qimg-a677791e4bb4f97d3a82766dd571f4ba-lq",
-    alive: true,
-    wand: ["Desconhecido"],
-  },
-  {
-    name: "Hagrid",
-    gender: ["Homem"],
-    species: ["Meio-Gigante"],
-    birth_year: [1958],
-    house: ["Grifinória"],
-    first_appearance: ["A Pedra Filosofal"],
-    atributes: ["Bruxo"],
-    filiations: ["Hogwarts", "Ordem da Fênix"],
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAvh_Tij1ZM3TTffh97LMrRL3Dv-C_m_L_Rw&s",
-    alive: true,
-    wand: ["Desconhecido"],
-  },
-  {
-    name: "Gina Weasley",
-    gender: ["Mulher"],
-    species: ["Humano"],
-    birth_year: [1982],
-    house: ["Grifinória"],
-    first_appearance: ["A Pedra Filosofal"],
-    atributes: ["Bruxo"],
-    filiations: [
-      "Hogwarts",
-      "Armada de Dumbledore",
-      "Ordem da Fênix",
-      "Profeta Diário",
-    ],
-    img: "https://qph.cf2.quoracdn.net/main-qimg-351b616104e52ffd89e363211a074d47-lq",
-    alive: true,
-    wand: ["Desconhecido"],
-  },
-  {
-    name: "Dobby",
-    gender: ["Homem"],
-    species: ["Elfo Doméstico"],
-    birth_year: [1946],
-    house: ["Não tem"],
-    first_appearance: ["A Câmara Secreta"],
-    atributes: ["Criatura Mágica"],
-    filiations: ["Hogwarts"],
-    img: "https://media.harrypotterfanzone.com/dobby-illustration-jonny-duddle.jpg",
-    alive: false,
-    wand: ["Desconhecido"],
-  },
-  {
-    name: "Canino",
-    gender: ["Homem"],
-    species: ["Cão"],
-    birth_year: ["Desconhecido"],
-    house: ["Não tem"],
-    first_appearance: ["A Pedra Filosofal"],
-    atributes: ["Não tem"],
-    filiations: ["Não tem"],
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrc-O6Paf0AedFNjw2IZ3acnqtw5bvrx89OQ&s",
-    alive: true,
-    wand: ["Desconhecido"],
-  },
-  {
-    name: "Aragogue",
-    gender: ["Mulher"],
-    species: ["Acromântula"],
-    birth_year: [1952],
-    house: ["Não tem"],
-    first_appearance: ["A Câmara Secreta"],
-    atributes: ["Criatura Mágica"],
-    filiations: ["Não tem"],
-    img: "https://monsterlegacy.net/wp-content/uploads/2017/02/aragogbeauty.jpg",
-    alive: true,
-    wand: ["Desconhecido"],
-  },
-  {
-    name: "Duda Dursley",
-    alias: "Dudinha",
-    gender: ["Homem"],
-    species: ["Humano"],
-    birth_year: [1980],
-    house: ["Não tem"],
-    first_appearance: ["A Pedra Filosofal"],
-    atributes: ["Trouxa"],
-    filiations: ["Não tem"],
-    img: "https://1abe7d7da8.cbaul-cdnwnd.com/8ef44cbb3ee66edc71f1fa0d141ce1b4/system_preview_detail_200000486-d9c7edabd6/1-%20Dudley.jpg",
-    alive: true,
-    wand: ["Desconhecido"],
-  },
-  {
-    name: "Nagini",
-    gender: ["Mulher"],
-    species: ["Humano", "Cobra"],
-    birth_year: [1927],
-    house: ["Não tem"],
-    first_appearance: ["O Cálice de Fogo"],
-    atributes: ["Maledictus"],
-    filiations: ["Comensais da Morte", "Horcrux"],
-    img: "https://kanto.legiaodosherois.com.br/w760-h398-cfill/wp-content/uploads/2018/10/legiao_bpS3qJBPVRzyYHLQdhK_fr8ZseX910AG6WTxkMiCnU.jpg.webp",
-    alive: false,
-    wand: ["Não Tem"],
-  },
-  {
-    name: "Chapéu Seletor",
-    gender: ["Não tem"],
-    species: ["Não tem"],
-    birth_year: ["Desconhecido"],
-    house: ["Não tem"],
-    first_appearance: ["O Cálice de Fogo"],
-    atributes: ["Objeto Mágico"],
-    filiations: ["Hogwarts"],
-    img: "https://pm1.aminoapps.com/6304/c5beb000f11bc8302570a036b185bf547f5a2604_00.jpg",
-    alive: true,
-    wand: ["Desconhecido"],
-  },
-];
-
 const CharacterInput = ({
   input,
   setInput,
@@ -243,10 +36,10 @@ const CharacterInput = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedCharacter, setSelectedCharacter] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [remainingCharacters, setRemainingCharacters] =
-    useState<Character[]>(characters);
-  const [filteredCharacters, setFilteredCharacters] =
-    useState<Character[]>(characters);
+  const [remainingCharacters, setRemainingCharacters] = useState<Character[]>(
+    []
+  );
+  const [filteredCharacters, setFilteredCharacters] = useState<Character[]>([]);
 
   useEffect(() => {
     if (input.length > 1) {
@@ -254,7 +47,10 @@ const CharacterInput = ({
         remainingCharacters.filter(
           (character) =>
             character.name.toLowerCase().includes(input.toLowerCase()) ||
-            character.alias?.toLowerCase().includes(input.toLowerCase())
+            character.alternate_names
+              .join()
+              .toLowerCase()
+              .includes(input.toLowerCase())
         )
       );
       onOpen();
@@ -263,6 +59,31 @@ const CharacterInput = ({
       onClose();
     }
   }, [input]);
+
+  useEffect(() => {
+    getAllCharacters();
+  }, []);
+
+  const getAllCharacters = async () => {
+    try {
+      const response = await fetch(
+        "https://harrypotterdleapi-07b4bbf3528e.herokuapp.com/api/characters",
+        {
+          method: "GET",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data: Character[] = await response.json();
+
+      setRemainingCharacters(data);
+    } catch (error) {
+      console.error("Erro ao buscar o personagem:", error);
+    }
+  };
 
   function selectCharacter(character: Character) {
     if (!isLoading) {
@@ -308,12 +129,14 @@ const CharacterInput = ({
               selectCharacter(character);
             }}
           >
-            <Image src={character.img} marginLeft={12} boxSize={32} />
+            <Image src={character.image} marginLeft={12} boxSize={32} />
             <Flex color={"black"} flexDirection={"column"} alignItems={"start"}>
               <Text margin={0}>{character.name}</Text>
-              <Text margin={0} color={"black"} fontSize={12}>
-                {character.alias}
-              </Text>
+              {character.alternate_names.length > 0 && (
+                <Text margin={0} color={"black"} fontSize={12}>
+                  {character.alternate_names[0]}
+                </Text>
+              )}
             </Flex>
           </HStack>
         );
