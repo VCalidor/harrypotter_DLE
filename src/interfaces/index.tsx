@@ -6,6 +6,7 @@ export interface Character {
   gender: string[];
   house: string[];
   birth_year: string[] | number[];
+  estimate: boolean;
   ancestry: string[];
   magical_attributes: string[];
   eye_colour: string[];
@@ -13,7 +14,7 @@ export interface Character {
   wand: string[];
   affiliations: string[];
   patronus: string[];
-  alive: boolean;
-  first_appearance: string[];
+  alive: boolean | string;
+  first_appearance: [string, number];
   image: string;
 }

@@ -37,7 +37,13 @@ const Tips = ({
       >
         <TipCard
           selectedCharacters={selectedCharacters}
-          content={chosenCharacter.alive ? ["Vivo"] : ["Morto"]}
+          content={
+            typeof chosenCharacter.alive === "string"
+              ? [chosenCharacter.alive]
+              : chosenCharacter.alive
+              ? ["Vivo"]
+              : ["Morto"]
+          }
           hit={hit}
           icon={IoSkull}
           minTries={3}

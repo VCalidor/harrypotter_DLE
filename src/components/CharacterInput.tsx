@@ -67,7 +67,7 @@ const CharacterInput = ({
   const getAllCharacters = async () => {
     try {
       const response = await fetch(
-        "https://harrypotterdleapi-07b4bbf3528e.herokuapp.com/api/characters",
+        "https://harrypotterdle-api.onrender.com/api/characters",
         {
           method: "GET",
         }

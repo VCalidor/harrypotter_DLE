@@ -32,6 +32,7 @@ function App() {
     gender: [],
     house: [],
     birth_year: [],
+    estimate: false,
     ancestry: [],
     magical_attributes: [],
     eye_colour: [],
@@ -40,7 +41,7 @@ function App() {
     affiliations: [],
     patronus: [],
     alive: false,
-    first_appearance: [],
+    first_appearance: ["", 0],
     image: "",
   });
 
@@ -51,7 +52,7 @@ function App() {
   const getChosenCharacter = async () => {
     try {
       const response = await fetch(
-        "https://harrypotterdleapi-07b4bbf3528e.herokuapp.com/api/characters/select-random",
+        "https://harrypotterdle-api.onrender.com/api/characters/select-random",
         {
           method: "GET",
         }

@@ -47,6 +47,7 @@ const SelectedCharactersComponent = ({
       />
       <AtributeCard
         atributes={character.birth_year}
+        estimated={character.estimate}
         chosenCharacterAtribute={chosenCharacter.birth_year}
         moreOrLess={true}
         time={time * 4}
@@ -75,8 +76,13 @@ const SelectedCharactersComponent = ({
         character={character}
       />
       <AtributeCard
-        atributes={character.first_appearance}
-        chosenCharacterAtribute={chosenCharacter.first_appearance}
+        atributes={[character.first_appearance[0]]}
+        chosenCharacterAtribute={[chosenCharacter.first_appearance[0]]}
+        moreOrLess={true}
+        comparingWith={[
+          character.first_appearance[1],
+          chosenCharacter.first_appearance[1],
+        ]}
         time={time * 8}
         isNew={isNew}
         character={character}

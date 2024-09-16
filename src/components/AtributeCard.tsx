@@ -9,14 +9,17 @@ const AtributeCard = ({
   isNew = false,
   character,
   moreOrLess = false,
+  estimated,
+  comparingWith,
 }: {
   atributes: string[] | number[];
-  alias?: string;
   chosenCharacterAtribute: Array<string | number>;
   time: number;
   isNew?: boolean;
   character?: any;
   moreOrLess?: boolean;
+  comparingWith?: number[];
+  estimated?: boolean;
 }) => {
   const [opacity, setOpacity] = useState(isNew ? 0 : 1);
   const [uod, setUod] = useState(0);
@@ -44,22 +47,27 @@ const AtributeCard = ({
   }
 
   function upOrDown() {
+    const comparison = comparingWith
+      ? comparingWith
+      : [atributes[0], chosenCharacterAtribute[0]];
+
     if (
-      typeof atributes[0] === "number" &&
-      typeof chosenCharacterAtribute[0] === "number"
+      typeof comparison[0] === "number" &&
+      typeof comparison[1] === "number"
     ) {
-      if (chosenCharacterAtribute[0] > atributes[0]) setUod(1);
-      else if (chosenCharacterAtribute[0] < atributes[0]) setUod(-1);
+      if (comparison[1] > comparison[0]) setUod(1);
+      else if (comparison[1] < comparison[0]) setUod(-1);
     } else if (
-      typeof atributes[0] === "number" ||
-      typeof chosenCharacterAtribute[0] === "number"
+      typeof comparison[0] === "number" ||
+      typeof comparison[1] === "number"
     ) {
-      setUod(typeof atributes[0] === "number" ? -1 : 1);
+      setUod(typeof comparison[0] === "number" ? -1 : 1);
     }
   }
 
   return (
     <Flex
+      zIndex={-1}
       key={character.name}
       width={100}
       height={90}
@@ -80,7 +88,7 @@ const AtributeCard = ({
           marginX={3}
           fontSize={atributes.length < 4 ? 16 : atributes.length == 4 ? 11 : 10}
         >
-          {atribute}
+          {atribute} {estimated ? "+/-" : ""}{" "}
         </Text>
       ))}
       {uod !== 0 && (
