@@ -90,7 +90,7 @@ const HitCharacter = ({
       </Flex>
       <Box>
         <Text margin={0}>
-          Você foi o #{hits} a encontrar o personagem{isDaily? " hoje" : ""}!
+          Você foi o #{hits} a encontrar o personagem{isDaily ? " hoje" : ""}!
         </Text>
         <Text marginBottom={0}>Número de tentativas: {tries}</Text>
       </Box>

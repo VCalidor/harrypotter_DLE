@@ -15,15 +15,15 @@ const Root = () => {
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-      <Image
-        src={backgroundImage}
-        position={"fixed"}
-        margin={0}
-        width="100%"
-        height="100%"
-        objectFit="cover"
-        zIndex={-1}
-      />
+    <Image
+      src={backgroundImage}
+      position={"fixed"}
+      margin={0}
+      width="100%"
+      height="100%"
+      objectFit="cover"
+      zIndex={-1}
+    />
     <MyProvider>
       <Root />
     </MyProvider>

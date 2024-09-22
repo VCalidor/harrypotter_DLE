@@ -27,7 +27,7 @@ const SelectedCharactersList = ({
   lastAddedCharacter,
   selectedCharacters,
   animate,
-  chosenCharacter
+  chosenCharacter,
 }: {
   lastAddedCharacter: Character | null;
   selectedCharacters: Character[];

@@ -38,7 +38,7 @@ export const MyProvider = ({ children }: { children: React.ReactNode }) => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       console.log("kalalala");
-      
+
       const data: Character[] = await response.json();
 
       localStorage.setItem("allCharacters", JSON.stringify(data));
