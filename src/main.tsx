@@ -15,7 +15,6 @@ const Root = () => {
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <MyProvider>
       <Image
         src={backgroundImage}
         position={"fixed"}
@@ -25,6 +24,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         objectFit="cover"
         zIndex={-1}
       />
+    <MyProvider>
       <Root />
     </MyProvider>
   </React.StrictMode>

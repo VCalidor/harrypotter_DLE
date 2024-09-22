@@ -23,6 +23,7 @@ const CharacterInput = ({
   setAnimate,
   setHit,
   chosenCharacter,
+  isDaily,
 }: {
   input: string;
   setInput: any;
@@ -33,6 +34,7 @@ const CharacterInput = ({
   setAnimate: any;
   setHit: any;
   chosenCharacter: Character;
+  isDaily: boolean;
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { allCharacters } = useMyContext();
@@ -76,8 +78,22 @@ const CharacterInput = ({
         setAnimate(false);
         setTimeout(() => {
           setIsLoading(false);
-          setHit(character.name === chosenCharacter.name);
-          setRemainingCharacters(allCharacters);
+
+          if (character.name === chosenCharacter.name) {
+            const fire: string[] = JSON.parse(
+              localStorage.getItem(isDaily ? "dailyFire" : "infiniteFire") ||
+                "[]"
+            );
+
+            fire.push(character.name);
+
+            localStorage.setItem(
+              isDaily ? "dailyFire" : "infiniteFire",
+              JSON.stringify(fire)
+            );
+            setHit(true);
+            setRemainingCharacters(allCharacters);
+          }
         }, 4500);
       }, 400);
       setInput("");

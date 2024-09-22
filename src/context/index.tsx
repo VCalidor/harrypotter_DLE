@@ -16,7 +16,12 @@ export const MyProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getAllCharacters();
+    const lsAllCharacters = localStorage.getItem("allCharacters");
+
+    if (lsAllCharacters) {
+      setAllCharacters(JSON.parse(lsAllCharacters));
+      setLoading(false);
+    } else getAllCharacters();
   }, []);
 
   const getAllCharacters = async () => {
@@ -32,9 +37,11 @@ export const MyProvider = ({ children }: { children: React.ReactNode }) => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
+      console.log("kalalala");
+      
       const data: Character[] = await response.json();
 
+      localStorage.setItem("allCharacters", JSON.stringify(data));
       setAllCharacters(data);
     } catch (error) {
       console.error("Erro ao buscar os personagens:", error);

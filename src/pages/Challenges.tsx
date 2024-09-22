@@ -1,13 +1,4 @@
-import {
-  Box,
-  HStack,
-  Icon,
-  IconButton,
-  Text,
-  Tooltip,
-  VStack,
-} from "@chakra-ui/react";
-import { BsInfoCircle, BsFillBarChartFill } from "react-icons/bs";
+import { HStack, IconButton, Text, VStack } from "@chakra-ui/react";
 import { GiReturnArrow } from "react-icons/gi";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import CharacterInput from "../components/CharacterInput";
 import SelectedCharactersList from "../components/SelectedCharactersList";
 import HitCharacter from "../components/HitCharacter";
+import StatsTab from "../components/StatsTab";
 import Tips from "../components/Tips";
 import { Character } from "../interfaces";
 import { useMyContext } from "../context";
@@ -66,8 +58,6 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
   useEffect(() => {
     hit && postHit();
   }, [hit]);
-
-  console.log(hits);
 
   const getChosenCharacter = async () => {
     try {
@@ -185,53 +175,7 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
           }}
         />
       </HStack>
-
-      <HStack gap={16}>
-        <Tooltip
-          label={
-            <Box bg={"red"} padding={8} borderRadius={4} color={"white"}>
-              <Text margin={6}>Estatísticas</Text>
-            </Box>
-          }
-          hasArrow
-          zIndex="tooltip"
-        >
-          <Box
-            color={"grey"}
-            transition="0.2s"
-            fontSize={24}
-            _hover={{
-              color: "white",
-              cursor: "pointer",
-              transform: "scale(1.2)",
-            }}
-          >
-            <Icon as={BsFillBarChartFill} />
-          </Box>
-        </Tooltip>
-        <Tooltip
-          label={
-            <Box bg={"red"} padding={8} borderRadius={4} color={"white"}>
-              <Text margin={6}>Como Jogar</Text>
-            </Box>
-          }
-          hasArrow
-          zIndex="tooltip"
-        >
-          <Box
-            transition="0.2s"
-            color={"grey"}
-            fontSize={24}
-            _hover={{
-              color: "white",
-              cursor: "pointer",
-              transform: "scale(1.2)",
-            }}
-          >
-            <Icon as={BsInfoCircle} />
-          </Box>
-        </Tooltip>
-      </HStack>
+      <StatsTab isDaily={isDaily} hit={hit} />
       <Tips
         selectedCharacters={selectedCharacters}
         hit={hit}
@@ -260,6 +204,7 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
             setAnimate={setAnimate}
             setHit={setHit}
             chosenCharacter={chosenCharacter}
+            isDaily={isDaily}
           />
         </VStack>
       )}
@@ -273,7 +218,7 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
       {hit && (
         <HitCharacter
           chosenCharacter={chosenCharacter}
-          hits={hits + 1}
+          hits={hits}
           tries={selectedCharacters.length + 1}
           isDaily={isDaily}
           restartChallenge={restartChallenge}
