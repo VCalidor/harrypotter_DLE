@@ -49,6 +49,9 @@ const TipCard = ({
   useEffect(() => {
     if (selectedCharacters.length > minTries) {
       setTip(true);
+    } else {
+      setTip(false);
+      setShowTip(false);
     }
   }, [selectedCharacters]);
 

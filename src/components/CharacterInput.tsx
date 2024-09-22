@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { BsSend } from "react-icons/bs";
+import { useMyContext } from "../context";
 
 import { Character } from "../interfaces";
 
@@ -34,11 +35,11 @@ const CharacterInput = ({
   chosenCharacter: Character;
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { allCharacters } = useMyContext();
   const [selectedCharacter, setSelectedCharacter] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [remainingCharacters, setRemainingCharacters] = useState<Character[]>(
-    []
-  );
+  const [remainingCharacters, setRemainingCharacters] =
+    useState<Character[]>(allCharacters);
   const [filteredCharacters, setFilteredCharacters] = useState<Character[]>([]);
 
   useEffect(() => {
@@ -60,31 +61,6 @@ const CharacterInput = ({
     }
   }, [input]);
 
-  useEffect(() => {
-    getAllCharacters();
-  }, []);
-
-  const getAllCharacters = async () => {
-    try {
-      const response = await fetch(
-        "https://harrypotterdle-api.onrender.com/api/characters",
-        {
-          method: "GET",
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data: Character[] = await response.json();
-
-      setRemainingCharacters(data);
-    } catch (error) {
-      console.error("Erro ao buscar o personagem:", error);
-    }
-  };
-
   function selectCharacter(character: Character) {
     if (!isLoading) {
       setIsLoading(true);
@@ -101,6 +77,7 @@ const CharacterInput = ({
         setTimeout(() => {
           setIsLoading(false);
           setHit(character.name === chosenCharacter.name);
+          setRemainingCharacters(allCharacters);
         }, 4500);
       }, 400);
       setInput("");

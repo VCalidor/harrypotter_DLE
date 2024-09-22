@@ -8,9 +8,11 @@ import TipCard from "./TipCard";
 const Tips = ({
   selectedCharacters,
   chosenCharacter,
+  isDaily,
   hit,
 }: {
   selectedCharacters: Character[];
+  isDaily: boolean;
   chosenCharacter: Character;
   hit: boolean;
 }) => {
@@ -27,7 +29,7 @@ const Tips = ({
       gap={26}
     >
       <Text fontSize={20} margin={0}>
-        ADIVINHE QUAL É O PERSONAGEM DE HOJE!
+        ADIVINHE QUAL É O PERSONAGEM{isDaily ? " DE HOJE" : ""}!
       </Text>
       <HStack
         gap={16}

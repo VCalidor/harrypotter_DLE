@@ -1,4 +1,12 @@
-import { Box, Center, Flex, Image, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Center,
+  Flex,
+  Image,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { useState } from "react";
 
 import { Character } from "../interfaces";
@@ -7,10 +15,14 @@ const HitCharacter = ({
   chosenCharacter,
   hits,
   tries,
+  isDaily,
+  restartChallenge,
 }: {
   chosenCharacter: Character;
   hits: number;
   tries: number;
+  isDaily: boolean;
+  restartChallenge: any;
 }) => {
   const [isHovering, setIsHovering] = useState(false);
 
@@ -78,18 +90,40 @@ const HitCharacter = ({
       </Flex>
       <Box>
         <Text margin={0}>
-          Você foi o #{hits} a encontrar o personagem hoje!
+          Você foi o #{hits} a encontrar o personagem{isDaily? " hoje" : ""}!
         </Text>
         <Text marginBottom={0}>Número de tentativas: {tries}</Text>
       </Box>
-      <Box>
-        <Text margin={0} fontSize={24}>
-          Próximo personagem em:
-        </Text>
-        <Text margin={0} marginTop={12} fontSize={32}>
-          05:26:32
-        </Text>
-      </Box>
+      {isDaily ? (
+        <Box>
+          <Text margin={0} fontSize={24}>
+            Próximo personagem em:
+          </Text>
+          <Text margin={0} marginTop={12} fontSize={32}>
+            05:26:32
+          </Text>
+        </Box>
+      ) : (
+        <Button
+          border={"solid 2px white"}
+          borderRadius={4}
+          w={"60%"}
+          minWidth={160}
+          height={80}
+          color={"black"}
+          background={"rgba(255, 255, 255)"}
+          cursor={"pointer"}
+          _hover={{ transform: "scale(1.1)" }}
+          transition={"0.2s"}
+          onClick={() => {
+            restartChallenge();
+          }}
+        >
+          <Text fontSize={16} margin={0} fontWeight={"bold"}>
+            Jogar Novamente
+          </Text>
+        </Button>
+      )}
     </VStack>
   );
 };
