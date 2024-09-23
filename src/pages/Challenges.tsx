@@ -1,4 +1,4 @@
-import { HStack, IconButton, Text, VStack } from "@chakra-ui/react";
+import { Button, HStack, Icon, Text, VStack } from "@chakra-ui/react";
 import { GiReturnArrow } from "react-icons/gi";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -155,12 +155,10 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
         <Text as="h1" margin={0} textAlign="center" flexGrow={1}>
           Mundo Bruxo
         </Text>
-        <IconButton
+        <Button
           position={"absolute"}
           right={0}
-          aria-label="return"
           onClick={() => navigate("/")}
-          icon={<GiReturnArrow />}
           fontSize={26}
           color={"black"}
           border={"none"}
@@ -173,7 +171,17 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
             transform: "scale(1.4) rotate(360deg)",
             boxShadow: "0 0 5px rgba(0, 0, 0, 1)",
           }}
-        />
+        >
+          <Icon as={GiReturnArrow} />
+          <Icon
+            as={GiReturnArrow}
+            position={"absolute"}
+            top={6}
+            left={2}
+            opacity={0.7}
+            filter="blur(2px)"
+          />
+        </Button>
       </HStack>
       <StatsTab isDaily={isDaily} hit={hit} />
       <Tips
