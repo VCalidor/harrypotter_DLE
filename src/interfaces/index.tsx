@@ -1,5 +1,5 @@
 export interface Character {
-  id: number;
+  id?: number;
   name: string;
   alternate_names: string[];
   species: string[];
@@ -9,11 +9,11 @@ export interface Character {
   estimate: boolean;
   ancestry: string[];
   magical_attributes: string[];
-  eye_colour: string[];
-  hair_colour: string[];
+  eye_colour?: string[];
+  hair_colour?: string[];
   wand: string[];
   affiliations: string[];
-  patronus: string[];
+  patronus?: string[];
   alive: boolean | string;
   first_appearance: [string, number];
   image: string;

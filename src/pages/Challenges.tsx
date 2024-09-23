@@ -2,6 +2,7 @@ import { Button, HStack, Icon, Text, VStack } from "@chakra-ui/react";
 import { GiReturnArrow } from "react-icons/gi";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+const API_URL = import.meta.env.VITE_API_URL;
 
 import CharacterInput from "../components/CharacterInput";
 import SelectedCharactersList from "../components/SelectedCharactersList";
@@ -24,7 +25,6 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
   const [animate, setAnimate] = useState(false);
   const [hit, setHit] = useState(false);
   const [chosenCharacter, setChosenCharacter] = useState<Character>({
-    id: 99999,
     name: "",
     alternate_names: [],
     species: [],
@@ -34,11 +34,8 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
     estimate: false,
     ancestry: [],
     magical_attributes: [],
-    eye_colour: [],
-    hair_colour: [],
     wand: [],
     affiliations: [],
-    patronus: [],
     alive: false,
     first_appearance: ["", 0],
     image: "",
@@ -61,13 +58,9 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
 
   const getChosenCharacter = async () => {
     try {
-      const response = await fetch(
-        // "http://localhost:3000/api/characters/daily-character",
-        "https://harrypotterdle-api.onrender.com/api/characters/daily-character",
-        {
-          method: "GET",
-        }
-      );
+      const response = await fetch(`${API_URL}api/characters/daily-character`, {
+        method: "GET",
+      });
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -84,10 +77,7 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
   const getHits = async () => {
     try {
       const response = await fetch(
-        // `http://localhost:3000/api/characters/hits?type=${
-        `https://harrypotterdle-api.onrender.com/api/characters/hits?type=${
-          isDaily ? "daily" : "infinite"
-        }`,
+        `${API_URL}api/characters/hits?type=${isDaily ? "daily" : "infinite"}`,
         {
           method: "GET",
         }
@@ -108,10 +98,7 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
   const postHit = async () => {
     try {
       const response = await fetch(
-        // `http://localhost:3000/api/characters/hits?type=${
-        `https://harrypotterdle-api.onrender.com/api/characters/hits?type=${
-          isDaily ? "daily" : "infinite"
-        }`,
+        `${API_URL}api/characters/hits?type=${isDaily ? "daily" : "infinite"}`,
         {
           method: "POST",
         }

@@ -12,6 +12,7 @@ import { BsSend } from "react-icons/bs";
 import { useMyContext } from "../context";
 
 import { Character } from "../interfaces";
+import { encryptData } from "../utils";
 
 const CharacterInput = ({
   input,
@@ -80,12 +81,19 @@ const CharacterInput = ({
           setIsLoading(false);
 
           if (character.name === chosenCharacter.name) {
-            const fire: string[] = JSON.parse(
+            const fire: { character: object; magic: string }[] = JSON.parse(
               localStorage.getItem(isDaily ? "dailyFire" : "infiniteFire") ||
                 "[]"
             );
 
-            fire.push(character.name);
+            fire.push({
+              character: {
+                name: character.name,
+                alternate_names: character.alternate_names,
+                image: character.image,
+              },
+              magic: encryptData(new Date().toISOString().split("T")[0]),
+            });
 
             localStorage.setItem(
               isDaily ? "dailyFire" : "infiniteFire",

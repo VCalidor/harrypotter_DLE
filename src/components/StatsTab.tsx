@@ -1,7 +1,8 @@
 import { Box, HStack, Icon, keyframes, Text, Tooltip } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AiFillFire } from "react-icons/ai";
 import { BsFillBarChartFill, BsInfoCircle } from "react-icons/bs";
+import { decryptData } from "../utils";
 
 const flaming = keyframes`
   0% {
@@ -29,16 +30,75 @@ const flaming = keyframes`
     opacity: 1;
   }`;
 
+interface FireData {
+  character: {
+    name: string;
+    alternate_names: string[];
+    image: string;
+  };
+  magic: string;
+}
+
 const StatsTab = ({ isDaily, hit }: { isDaily: boolean; hit: boolean }) => {
-  let fire = JSON.parse(
-    localStorage.getItem(isDaily ? "dailyFire" : "infiniteFire") || "[]"
-  );
+  const [fire, setFire] = useState<FireData[]>([]);
 
   useEffect(() => {
-    fire = JSON.parse(
+    const fi = JSON.parse(
       localStorage.getItem(isDaily ? "dailyFire" : "infiniteFire") || "[]"
     );
+
+    if (isDaily) getDailyFire(fi);
+    else setFire(fi);
+  }, []);
+
+  useEffect(() => {
+    const fi = JSON.parse(
+      localStorage.getItem(isDaily ? "dailyFire" : "infiniteFire") || "[]"
+    );
+
+    if (isDaily) getDailyFire(fi);
+    else setFire(fi);
   }, [hit]);
+
+  const getDailyFire = (fi: FireData[]) => {
+    const today = new Date();
+    const yesterday = new Date();
+    yesterday.setDate(today.getDate() - 1);
+
+    let latestDay: string;
+
+    const result = fi
+      .slice()
+      .reverse()
+      .filter((f: any, index: number) => {
+        if (!f.magic) return false;
+
+        const decryptedMagic = decryptData(f.magic);
+
+        if (index === 0) {
+          if (decryptedMagic === today.toISOString().split("T")[0])
+            latestDay = today.toISOString().split("T")[0];
+          else if (decryptedMagic === yesterday.toISOString().split("T")[0])
+            latestDay = yesterday.toISOString().split("T")[0];
+          else return false;
+
+          return true;
+        }
+
+        if (latestDay === null) return false;
+
+        let decryptedMagicDate = new Date(decryptedMagic);
+        decryptedMagicDate.setDate(decryptedMagicDate.getDate() + 1);
+
+        if (decryptedMagicDate.toISOString().split("T")[0] === latestDay) {
+          latestDay = decryptedMagic;
+          return true;
+        }
+        false;
+      });
+
+    setFire(result);
+  };
 
   return (
     <HStack gap={16}>
