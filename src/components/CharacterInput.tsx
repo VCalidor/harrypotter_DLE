@@ -41,9 +41,24 @@ const CharacterInput = ({
   const { allCharacters } = useMyContext();
   const [selectedCharacter, setSelectedCharacter] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [remainingCharacters, setRemainingCharacters] =
-    useState<Character[]>(allCharacters);
+  const [remainingCharacters, setRemainingCharacters] = useState<Character[]>(
+    []
+  );
   const [filteredCharacters, setFilteredCharacters] = useState<Character[]>([]);
+
+  useEffect(() => {
+    const dailyTries = JSON.parse(localStorage.getItem("dailyTries") || "[]");
+
+    const dailyTriesNames = new Set(
+      dailyTries.map((character: Character) => character.name)
+    );
+
+    const remainingCharacters = allCharacters.filter(
+      (character) => !dailyTriesNames.has(character.name)
+    );
+
+    setRemainingCharacters(remainingCharacters);
+  }, []);
 
   useEffect(() => {
     if (input.length > 1) {
@@ -74,9 +89,22 @@ const CharacterInput = ({
       setTimeout(() => {
         lastAddedCharacter &&
           setSelectedCharacters([lastAddedCharacter, ...selectedCharacters]);
-        setLastAddedCharacter({});
         setLastAddedCharacter(character);
         setAnimate(false);
+
+        if (isDaily) {
+          const dailyTries = JSON.parse(
+            localStorage.getItem("dailyTries") || "[]"
+          );
+
+          dailyTries.unshift({
+            ...character,
+            magic: encryptData(new Date().toISOString().split("T")[0]),
+          });
+
+          localStorage.setItem("dailyTries", JSON.stringify(dailyTries));
+        }
+
         setTimeout(() => {
           setIsLoading(false);
 
@@ -86,7 +114,7 @@ const CharacterInput = ({
                 "[]"
             );
 
-            fire.push({
+            fire.unshift({
               character: {
                 name: character.name,
                 alternate_names: character.alternate_names,

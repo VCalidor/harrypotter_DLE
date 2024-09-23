@@ -21,9 +21,12 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
   const [input, setInput] = useState("");
   const [selectedCharacters, setSelectedCharacters] = useState<Character[]>([]);
   const [lastAddedCharacter, setLastAddedCharacter] =
-    useState<Character | null>(null);
+    useState<Character | null>(
+      JSON.parse(localStorage.getItem("dailyTries") || "[]")[0]
+    );
   const [animate, setAnimate] = useState(false);
   const [hit, setHit] = useState(false);
+  const [alreadyHit, setAlreadyHit] = useState(false);
   const [chosenCharacter, setChosenCharacter] = useState<Character>({
     name: "",
     alternate_names: [],
@@ -45,9 +48,9 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    isDaily
-      ? getChosenCharacter()
-      : setChosenCharacter(getRandomCharacter(allCharacters));
+    if (isDaily) {
+      getChosenCharacter();
+    } else setChosenCharacter(getRandomCharacter(allCharacters));
 
     getHits();
   }, []);
@@ -57,6 +60,10 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
   }, [hit]);
 
   const getChosenCharacter = async () => {
+    const dailyTries = JSON.parse(localStorage.getItem("dailyTries") || "[]");
+
+    setSelectedCharacters(dailyTries.filter((_d: any, i: number) => i !== 0));
+    setLastAddedCharacter(dailyTries[0]);
     try {
       const response = await fetch(`${API_URL}api/characters/daily-character`, {
         method: "GET",
@@ -68,9 +75,10 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
 
       const data: Character = await response.json();
 
+      dailyTries[0]?.name === data.name && setAlreadyHit(true);
       setChosenCharacter(data);
     } catch (error) {
-      console.error("Erro ao buscar os personagens:", error);
+      console.error("Erro ao buscar o personagem:", error);
     }
   };
 
@@ -91,7 +99,7 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
 
       setHits(data);
     } catch (error) {
-      console.error("Erro ao buscar os personagens:", error);
+      console.error("Erro ao buscar os acertos:", error);
     }
   };
 
@@ -123,6 +131,8 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
     setAnimate(false);
     setChosenCharacter(getRandomCharacter(allCharacters));
   };
+
+  console.log(!hit || !alreadyHit);
 
   return (
     <VStack
@@ -170,14 +180,14 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
           />
         </Button>
       </HStack>
-      <StatsTab isDaily={isDaily} hit={hit} />
+      <StatsTab isDaily={isDaily} hit={hit || alreadyHit} />
       <Tips
         selectedCharacters={selectedCharacters}
-        hit={hit}
+        hit={hit || alreadyHit}
         chosenCharacter={chosenCharacter}
         isDaily={isDaily}
       />
-      {!hit && (
+      {!alreadyHit && !hit && (
         <VStack
           maxW={400}
           width={"80%"}
@@ -186,8 +196,6 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
           paddingY={12}
           borderRadius={4}
           transition={".4s"}
-          transform={`scale(${hit ? 0.8 : 1})`}
-          opacity={hit ? 0 : 1}
         >
           <CharacterInput
             input={input}
@@ -210,7 +218,7 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
         selectedCharacters={selectedCharacters}
         animate={animate}
       />
-      {hit && (
+      {(hit || alreadyHit) && (
         <HitCharacter
           chosenCharacter={chosenCharacter}
           hits={hits}

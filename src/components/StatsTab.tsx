@@ -67,35 +67,32 @@ const StatsTab = ({ isDaily, hit }: { isDaily: boolean; hit: boolean }) => {
 
     let latestDay: string;
 
-    const result = fi
-      .slice()
-      .reverse()
-      .filter((f: any, index: number) => {
-        if (!f.magic) return false;
+    const result = fi.filter((f: any, index: number) => {
+      if (!f.magic) return false;
 
-        const decryptedMagic = decryptData(f.magic);
+      const decryptedMagic = decryptData(f.magic);
 
-        if (index === 0) {
-          if (decryptedMagic === today.toISOString().split("T")[0])
-            latestDay = today.toISOString().split("T")[0];
-          else if (decryptedMagic === yesterday.toISOString().split("T")[0])
-            latestDay = yesterday.toISOString().split("T")[0];
-          else return false;
+      if (index === 0) {
+        if (decryptedMagic === today.toISOString().split("T")[0])
+          latestDay = today.toISOString().split("T")[0];
+        else if (decryptedMagic === yesterday.toISOString().split("T")[0])
+          latestDay = yesterday.toISOString().split("T")[0];
+        else return false;
 
-          return true;
-        }
+        return true;
+      }
 
-        if (latestDay === null) return false;
+      if (latestDay === null) return false;
 
-        let decryptedMagicDate = new Date(decryptedMagic);
-        decryptedMagicDate.setDate(decryptedMagicDate.getDate() + 1);
+      let decryptedMagicDate = new Date(decryptedMagic);
+      decryptedMagicDate.setDate(decryptedMagicDate.getDate() + 1);
 
-        if (decryptedMagicDate.toISOString().split("T")[0] === latestDay) {
-          latestDay = decryptedMagic;
-          return true;
-        }
-        false;
-      });
+      if (decryptedMagicDate.toISOString().split("T")[0] === latestDay) {
+        latestDay = decryptedMagic;
+        return true;
+      }
+      false;
+    });
 
     setFire(result);
   };
