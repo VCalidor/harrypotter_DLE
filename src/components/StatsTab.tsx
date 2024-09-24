@@ -98,7 +98,14 @@ const StatsTab = ({ isDaily, hit }: { isDaily: boolean; hit: boolean }) => {
   };
 
   return (
-    <HStack gap={16}>
+    <HStack
+      gap={16}
+      backgroundColor="rgba(0, 0, 0, 0.6)"
+      padding={6}
+      paddingX={12}
+      paddingBottom={0}
+      rounded={6}
+    >
       <Tooltip
         label={
           <Box bg={"red"} padding={8} borderRadius={4} color={"white"}>
@@ -126,6 +133,7 @@ const StatsTab = ({ isDaily, hit }: { isDaily: boolean; hit: boolean }) => {
         color={fire.length > 0 ? "red" : "grey"}
         position={"relative"}
         transition="0.2s"
+        fontWeight="bolder"
         animation={
           fire.length > 0 ? `${flaming} 1.5s ease-in-out infinite` : ""
         }

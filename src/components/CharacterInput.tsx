@@ -44,17 +44,19 @@ const CharacterInput = ({
   const [input, setInput] = useState("");
 
   useEffect(() => {
-    const dailyTries = JSON.parse(localStorage.getItem("dailyTries") || "[]");
+    let characters = allCharacters;
+    if (isDaily) {
+      const dailyTries = JSON.parse(localStorage.getItem("dailyTries") || "[]");
 
-    const dailyTriesNames = new Set(
-      dailyTries.map((d: {character: Character}) => d.character.name)
-    );
+      const dailyTriesNames = new Set(
+        dailyTries.map((d: { character: Character }) => d.character.name)
+      );
 
-    const remainingCharacters = allCharacters.filter(
-      (character) => !dailyTriesNames.has(character.name)
-    );
-
-    setRemainingCharacters(remainingCharacters);
+      characters = allCharacters.filter(
+        (character) => !dailyTriesNames.has(character.name)
+      );
+    }
+    setRemainingCharacters(characters);
   }, []);
 
   useEffect(() => {

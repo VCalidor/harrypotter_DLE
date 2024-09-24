@@ -180,55 +180,54 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
         </Button>
       </HStack>
       <StatsTab isDaily={isDaily} hit={hit || alreadyHit} />
-      {!isDaily ||
-        (chosenCharacter.name && (
-          <>
-            <Tips
-              selectedCharacters={selectedCharacters}
-              hit={hit || alreadyHit}
-              chosenCharacter={chosenCharacter}
-              isDaily={isDaily}
-            />
-            {!alreadyHit && !hit && (
-              <VStack
-                maxW={400}
-                width={"80%"}
-                backgroundColor="rgba(0, 0, 0, 0.6)"
-                paddingX={12}
-                paddingY={12}
-                borderRadius={4}
-                transition={".4s"}
-              >
-                <CharacterInput
-                  selectedCharacters={selectedCharacters}
-                  setSelectedCharacters={setSelectedCharacters}
-                  lastAddedCharacter={lastAddedCharacter}
-                  setLastAddedCharacter={setLastAddedCharacter}
-                  setAnimate={setAnimate}
-                  setHit={setHit}
-                  chosenCharacter={chosenCharacter}
-                  isDaily={isDaily}
-                />
-              </VStack>
-            )}
-            <Text margin={0}>{hits} pessoas ja descobriram!</Text>
-            <SelectedCharactersList
-              chosenCharacter={chosenCharacter}
-              lastAddedCharacter={lastAddedCharacter}
-              selectedCharacters={selectedCharacters}
-              animate={animate}
-            />
-            {(hit || alreadyHit) && (
-              <HitCharacter
+      {(!isDaily || chosenCharacter.name) && (
+        <>
+          <Tips
+            selectedCharacters={selectedCharacters}
+            hit={hit || alreadyHit}
+            chosenCharacter={chosenCharacter}
+            isDaily={isDaily}
+          />
+          {!alreadyHit && !hit && (
+            <VStack
+              maxW={400}
+              width={"80%"}
+              backgroundColor="rgba(0, 0, 0, 0.6)"
+              paddingX={12}
+              paddingY={12}
+              borderRadius={4}
+              transition={".4s"}
+            >
+              <CharacterInput
+                selectedCharacters={selectedCharacters}
+                setSelectedCharacters={setSelectedCharacters}
+                lastAddedCharacter={lastAddedCharacter}
+                setLastAddedCharacter={setLastAddedCharacter}
+                setAnimate={setAnimate}
+                setHit={setHit}
                 chosenCharacter={chosenCharacter}
-                hits={hits}
-                tries={selectedCharacters.length + 1}
                 isDaily={isDaily}
-                restartChallenge={restartChallenge}
               />
-            )}
-          </>
-        ))}
+            </VStack>
+          )}
+          <Text margin={0}>{hits} pessoas ja descobriram!</Text>
+          <SelectedCharactersList
+            chosenCharacter={chosenCharacter}
+            lastAddedCharacter={lastAddedCharacter}
+            selectedCharacters={selectedCharacters}
+            animate={animate}
+          />
+          {(hit || alreadyHit) && (
+            <HitCharacter
+              chosenCharacter={chosenCharacter}
+              hits={hits}
+              tries={selectedCharacters.length + 1}
+              isDaily={isDaily}
+              restartChallenge={restartChallenge}
+            />
+          )}
+        </>
+      )}
     </VStack>
   );
 };
