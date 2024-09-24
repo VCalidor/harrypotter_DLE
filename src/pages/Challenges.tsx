@@ -18,12 +18,9 @@ const getRandomCharacter = (characters: Character[]) => {
 
 const Challenges = ({ isDaily }: { isDaily: boolean }) => {
   const { allCharacters } = useMyContext();
-  const [input, setInput] = useState("");
   const [selectedCharacters, setSelectedCharacters] = useState<Character[]>([]);
   const [lastAddedCharacter, setLastAddedCharacter] =
-    useState<Character | null>(
-      JSON.parse(localStorage.getItem("dailyTries") || "[]")[0]
-    );
+    useState<Character | null>(null);
   const [animate, setAnimate] = useState(false);
   const [hit, setHit] = useState(false);
   const [alreadyHit, setAlreadyHit] = useState(false);
@@ -48,9 +45,9 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isDaily) {
-      getChosenCharacter();
-    } else setChosenCharacter(getRandomCharacter(allCharacters));
+    isDaily
+      ? getChosenCharacter()
+      : setChosenCharacter(getRandomCharacter(allCharacters));
 
     getHits();
   }, []);
@@ -62,8 +59,12 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
   const getChosenCharacter = async () => {
     const dailyTries = JSON.parse(localStorage.getItem("dailyTries") || "[]");
 
-    setSelectedCharacters(dailyTries.filter((_d: any, i: number) => i !== 0));
-    setLastAddedCharacter(dailyTries[0]);
+    setSelectedCharacters(
+      dailyTries
+        .filter((_d: any, i: number) => i !== 0)
+        .map((d: any) => d.character)
+    );
+    setLastAddedCharacter(dailyTries[0]?.character);
     try {
       const response = await fetch(`${API_URL}api/characters/daily-character`, {
         method: "GET",
@@ -75,7 +76,7 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
 
       const data: Character = await response.json();
 
-      dailyTries[0]?.name === data.name && setAlreadyHit(true);
+      dailyTries[0]?.character.name === data.name && setAlreadyHit(true);
       setChosenCharacter(data);
     } catch (error) {
       console.error("Erro ao buscar o personagem:", error);
@@ -132,8 +133,6 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
     setChosenCharacter(getRandomCharacter(allCharacters));
   };
 
-  console.log(!hit || !alreadyHit);
-
   return (
     <VStack
       w={"100%"}
@@ -181,52 +180,55 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
         </Button>
       </HStack>
       <StatsTab isDaily={isDaily} hit={hit || alreadyHit} />
-      <Tips
-        selectedCharacters={selectedCharacters}
-        hit={hit || alreadyHit}
-        chosenCharacter={chosenCharacter}
-        isDaily={isDaily}
-      />
-      {!alreadyHit && !hit && (
-        <VStack
-          maxW={400}
-          width={"80%"}
-          backgroundColor="rgba(0, 0, 0, 0.6)"
-          paddingX={12}
-          paddingY={12}
-          borderRadius={4}
-          transition={".4s"}
-        >
-          <CharacterInput
-            input={input}
-            setInput={setInput}
-            selectedCharacters={selectedCharacters}
-            setSelectedCharacters={setSelectedCharacters}
-            lastAddedCharacter={lastAddedCharacter}
-            setLastAddedCharacter={setLastAddedCharacter}
-            setAnimate={setAnimate}
-            setHit={setHit}
-            chosenCharacter={chosenCharacter}
-            isDaily={isDaily}
-          />
-        </VStack>
-      )}
-      <Text margin={0}>{hits} pessoas ja descobriram!</Text>
-      <SelectedCharactersList
-        chosenCharacter={chosenCharacter}
-        lastAddedCharacter={lastAddedCharacter}
-        selectedCharacters={selectedCharacters}
-        animate={animate}
-      />
-      {(hit || alreadyHit) && (
-        <HitCharacter
-          chosenCharacter={chosenCharacter}
-          hits={hits}
-          tries={selectedCharacters.length + 1}
-          isDaily={isDaily}
-          restartChallenge={restartChallenge}
-        />
-      )}
+      {!isDaily ||
+        (chosenCharacter.name && (
+          <>
+            <Tips
+              selectedCharacters={selectedCharacters}
+              hit={hit || alreadyHit}
+              chosenCharacter={chosenCharacter}
+              isDaily={isDaily}
+            />
+            {!alreadyHit && !hit && (
+              <VStack
+                maxW={400}
+                width={"80%"}
+                backgroundColor="rgba(0, 0, 0, 0.6)"
+                paddingX={12}
+                paddingY={12}
+                borderRadius={4}
+                transition={".4s"}
+              >
+                <CharacterInput
+                  selectedCharacters={selectedCharacters}
+                  setSelectedCharacters={setSelectedCharacters}
+                  lastAddedCharacter={lastAddedCharacter}
+                  setLastAddedCharacter={setLastAddedCharacter}
+                  setAnimate={setAnimate}
+                  setHit={setHit}
+                  chosenCharacter={chosenCharacter}
+                  isDaily={isDaily}
+                />
+              </VStack>
+            )}
+            <Text margin={0}>{hits} pessoas ja descobriram!</Text>
+            <SelectedCharactersList
+              chosenCharacter={chosenCharacter}
+              lastAddedCharacter={lastAddedCharacter}
+              selectedCharacters={selectedCharacters}
+              animate={animate}
+            />
+            {(hit || alreadyHit) && (
+              <HitCharacter
+                chosenCharacter={chosenCharacter}
+                hits={hits}
+                tries={selectedCharacters.length + 1}
+                isDaily={isDaily}
+                restartChallenge={restartChallenge}
+              />
+            )}
+          </>
+        ))}
     </VStack>
   );
 };

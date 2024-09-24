@@ -15,8 +15,6 @@ import { Character } from "../interfaces";
 import { encryptData } from "../utils";
 
 const CharacterInput = ({
-  input,
-  setInput,
   selectedCharacters,
   setSelectedCharacters,
   lastAddedCharacter,
@@ -26,8 +24,6 @@ const CharacterInput = ({
   chosenCharacter,
   isDaily,
 }: {
-  input: string;
-  setInput: any;
   selectedCharacters: Character[];
   setSelectedCharacters: any;
   lastAddedCharacter: Character | null;
@@ -45,12 +41,13 @@ const CharacterInput = ({
     []
   );
   const [filteredCharacters, setFilteredCharacters] = useState<Character[]>([]);
+  const [input, setInput] = useState("");
 
   useEffect(() => {
     const dailyTries = JSON.parse(localStorage.getItem("dailyTries") || "[]");
 
     const dailyTriesNames = new Set(
-      dailyTries.map((character: Character) => character.name)
+      dailyTries.map((d: {character: Character}) => d.character.name)
     );
 
     const remainingCharacters = allCharacters.filter(
@@ -98,7 +95,7 @@ const CharacterInput = ({
           );
 
           dailyTries.unshift({
-            ...character,
+            character,
             magic: encryptData(new Date().toISOString().split("T")[0]),
           });
 

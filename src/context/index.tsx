@@ -25,17 +25,23 @@ export const MyProvider = ({ children }: { children: React.ReactNode }) => {
     const dailyTries = JSON.parse(localStorage.getItem("dailyTries") || "[]");
     const lsAllCharacters = localStorage.getItem("allCharacters");
 
-    if (dailyFire.length > 0)
-      !checkIfIsValid(dailyFire) && localStorage.removeItem("dailyFire");
-    if (infiniteFire.length > 0)
-      !checkIfIsValid(infiniteFire) && localStorage.removeItem("infiniteFire");
+    if (dailyFire.length > 0) {
+      const result = dailyFire.filter((d: { magic: string }) =>
+        checkIfIsValid(d)
+      );
+      localStorage.setItem("dailyFire", JSON.stringify(result));
+    }
+    if (infiniteFire.length > 0) {
+      const result = infiniteFire.filter((d: { magic: string }) =>
+        checkIfIsValid(d)
+      );
+      localStorage.setItem("infiniteFire", JSON.stringify(result));
+    }
     if (dailyTries.length > 0 && typeof dailyTries[0].magic === "string") {
-      const regex = /^\d{4}-\d{2}-\d{2}$/;
       const today = new Date().toISOString().split("T")[0];
       const decryptedMagic = decryptData(dailyTries[0].magic);
-
-      regex.test(decryptedMagic) ||
-        (decryptedMagic !== today && localStorage.removeItem("dailyTries"));
+      if (decryptedMagic !== today || checkIfIsValid(decryptedMagic))
+        localStorage.removeItem("dailyTries");
     }
 
     if (lsAllCharacters) {
@@ -65,18 +71,16 @@ export const MyProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const checkIfIsValid = (data: []) => {
+  const checkIfIsValid = (data: { magic: string }) => {
     const regex = /^\d{4}-\d{2}-\d{2}$/;
 
-    return data.every((d: any) => {
-      if (!d.magic) return false;
+    if (!data.magic) return false;
 
-      const decryptedMagic = decryptData(d.magic);
+    const decryptedMagic = decryptData(data.magic);
 
-      if (typeof decryptedMagic !== "string") return false;
+    if (typeof decryptedMagic !== "string") return false;
 
-      return regex.test(decryptedMagic);
-    });
+    return regex.test(decryptedMagic);
   };
 
   return (
