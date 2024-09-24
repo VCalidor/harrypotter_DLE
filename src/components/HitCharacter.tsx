@@ -3,13 +3,33 @@ import {
   Button,
   Center,
   Flex,
+  HStack,
+  IconButton,
   Image,
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Character } from "../interfaces";
+import { IoMdClose } from "react-icons/io";
+import { RiFullscreenFill } from "react-icons/ri";
+
+const calculateTime = () => {
+  const time = new Date();
+  time.setHours(1 - time.getHours());
+  time.setMinutes(60 - time.getMinutes());
+  time.setSeconds(60 - time.getSeconds());
+  return time;
+};
+
+const formatTime = (time: Date) => {
+  const hours = String(time.getHours()).padStart(2, "0");
+  const minutes = String(time.getMinutes()).padStart(2, "0");
+  const seconds = String(time.getSeconds()).padStart(2, "0");
+
+  return `${hours} : ${minutes} : ${seconds}`;
+};
 
 const HitCharacter = ({
   chosenCharacter,
@@ -17,50 +37,98 @@ const HitCharacter = ({
   tries,
   isDaily,
   restartChallenge,
+  isModal,
+  onClose,
+  onOpen,
 }: {
   chosenCharacter: Character;
   hits: number;
   tries: number;
   isDaily: boolean;
   restartChallenge: any;
+  isModal: boolean;
+  onClose: any;
+  onOpen: any;
 }) => {
   const [isHovering, setIsHovering] = useState(false);
+  const [time, setTime] = useState(calculateTime());
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setTime((prevTime) => {
+        const newTime = new Date(prevTime);
+        newTime.setSeconds(newTime.getSeconds() - 1);
+
+        if (newTime.getTime() <= 0) {
+          window.location.reload();
+          return prevTime;
+        }
+
+        return newTime;
+      });
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
   return (
     <VStack
-      backgroundColor="rgba(0, 0, 0, 0.6)"
+      backgroundColor="rgba(0, 0, 0, .6)"
       borderRadius={6}
       padding={64}
       paddingX={96}
       gap={26}
       marginTop={64}
+      color={"white"}
+      textAlign={"center"}
+      position={"relative"}
     >
-      <Text as={"h2"} margin={0}>
+      <IconButton
+        position={"absolute"}
+        fontSize={32}
+        right={24}
+        top={24}
+        background={"none"}
+        border={"none"}
+        color={"gray"}
+        aria-label="close"
+        icon={isModal ? <IoMdClose /> : <RiFullscreenFill />}
+        onClick={() => (isModal ? onClose() : onOpen())}
+        transition={".2s"}
+        _hover={{
+          transform: "scale(1.2) rotate(90deg)",
+          color: "white",
+          cursor: "pointer",
+        }}
+      />
+      <Text as={"h2"} margin={0} fontSize={32}>
         Parabéns
       </Text>
-      <Flex gap={42}>
+      <HStack gap={42}>
         <Flex
           onMouseOver={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
           position={"relative"}
           borderRadius={4}
-          width={100}
-          height={90}
+          width={200}
+          height={180}
           transition={".75s"}
           border={"solid 4px black"}
         >
           <Image
             borderRadius={4}
-            width={100}
-            height={90}
+            width={200}
+            height={180}
             src={chosenCharacter.image}
             alt={chosenCharacter.name}
           />
           <Center
             position={"absolute"}
             zIndex={10}
-            width={100}
-            height={90}
+            width={200}
+            height={180}
             transition={".2s"}
             opacity={isHovering ? 100 : 0}
           >
@@ -73,24 +141,22 @@ const HitCharacter = ({
               <Text color={"black"} margin={"0"} fontSize={12}>
                 {chosenCharacter.name}
               </Text>
-              {chosenCharacter.alternate_names.length > 0 && (
-                <Text color={"black"} margin={"0"} fontSize={8}>
-                  {chosenCharacter.alternate_names[0]}
-                </Text>
-              )}
             </Box>
           </Center>
         </Flex>
         <VStack gap={0}>
-          <Text color={"gray"} fontSize={12} marginBottom={4}>
+          <Text color={"gray"} fontSize={14} marginBottom={4}>
             Você acertou
           </Text>
-          <Text margin={0}>{chosenCharacter.name}</Text>
+          <Text margin={0} fontSize={24}>
+            {chosenCharacter.name}
+          </Text>
         </VStack>
-      </Flex>
+      </HStack>
       <Box>
         <Text margin={0}>
-          Você foi o #{hits} a encontrar o personagem{isDaily ? " hoje" : ""}!
+          Você foi o/a {hits}º a encontrar o personagem
+          {isDaily ? " hoje" : ""}!
         </Text>
         <Text marginBottom={0}>Número de tentativas: {tries}</Text>
       </Box>
@@ -99,8 +165,8 @@ const HitCharacter = ({
           <Text margin={0} fontSize={24}>
             Próximo personagem em:
           </Text>
-          <Text margin={0} marginTop={12} fontSize={32}>
-            05:26:32
+          <Text margin={0} fontSize={24} fontWeight={"bold"}>
+            {formatTime(time)}
           </Text>
         </Box>
       ) : (

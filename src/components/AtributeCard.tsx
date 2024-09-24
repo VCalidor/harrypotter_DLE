@@ -67,7 +67,7 @@ const AtributeCard = ({
 
   return (
     <Flex
-      zIndex={-1}
+      zIndex={0}
       key={character.name}
       width={100}
       height={90}
@@ -80,6 +80,7 @@ const AtributeCard = ({
       justifyContent={"space-evenly"}
       position={"relative"}
       alignItems={"center"}
+      _hover={{ transform: "scale(1.1)", transition: ".3s" }}
     >
       {atributes.map((atribute, index) => (
         <Text

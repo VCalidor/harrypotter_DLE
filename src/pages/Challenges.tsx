@@ -1,4 +1,15 @@
-import { Button, HStack, Icon, Text, VStack } from "@chakra-ui/react";
+import {
+  Button,
+  HStack,
+  Icon,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalOverlay,
+  Text,
+  useDisclosure,
+  VStack,
+} from "@chakra-ui/react";
 import { GiReturnArrow } from "react-icons/gi";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +29,7 @@ const getRandomCharacter = (characters: Character[]) => {
 
 const Challenges = ({ isDaily }: { isDaily: boolean }) => {
   const { allCharacters } = useMyContext();
+  const { isOpen, onClose, onOpen } = useDisclosure();
   const [selectedCharacters, setSelectedCharacters] = useState<Character[]>([]);
   const [lastAddedCharacter, setLastAddedCharacter] =
     useState<Character | null>(null);
@@ -55,6 +67,10 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
   useEffect(() => {
     hit && postHit();
   }, [hit]);
+
+  useEffect(() => {
+    onOpen();
+  }, [hit || alreadyHit]);
 
   const getChosenCharacter = async () => {
     const dailyTries = JSON.parse(localStorage.getItem("dailyTries") || "[]");
@@ -217,14 +233,41 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
             selectedCharacters={selectedCharacters}
             animate={animate}
           />
-          {(hit || alreadyHit) && (
-            <HitCharacter
-              chosenCharacter={chosenCharacter}
-              hits={hits}
-              tries={selectedCharacters.length + 1}
-              isDaily={isDaily}
-              restartChallenge={restartChallenge}
-            />
+          {/* {(hit || alreadyHit) && ( */}
+          {true && (
+            <>
+              <Modal isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay
+                  backdropFilter="auto"
+                  backdropInvert="6%"
+                  backdropBlur="2px"
+                />
+                <ModalContent onClick={onClose}>
+                  <ModalBody w={"50%"} minW={420} margin={"auto"}>
+                    <HitCharacter
+                      onOpen={onOpen}
+                      onClose={onClose}
+                      isModal={true}
+                      chosenCharacter={chosenCharacter}
+                      hits={hits}
+                      tries={selectedCharacters.length + 1}
+                      isDaily={isDaily}
+                      restartChallenge={restartChallenge}
+                    />
+                  </ModalBody>
+                </ModalContent>
+              </Modal>
+              <HitCharacter
+                onOpen={onOpen}
+                onClose={onClose}
+                isModal={false}
+                chosenCharacter={chosenCharacter}
+                hits={hits}
+                tries={selectedCharacters.length + 1}
+                isDaily={isDaily}
+                restartChallenge={restartChallenge}
+              />
+            </>
           )}
         </>
       )}

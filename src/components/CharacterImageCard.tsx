@@ -30,6 +30,7 @@ const CharacterImageCard = ({
       transition={".7s"}
       opacity={opacity}
       transform={`scale(${opacity})`}
+      _hover={{ transform: "scale(1.1)", transition: ".3s" }}
     >
       <Image
         borderRadius={4}
