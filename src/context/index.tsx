@@ -39,7 +39,7 @@ export const MyProvider = ({ children }: { children: React.ReactNode }) => {
     }
     if (dailyTries.length > 0 && typeof dailyTries[0].magic === "string") {
       const t = new Date();
-      t.setHours(t.getHours() - 2);
+      t.setHours(t.getHours() - 5);
       const today = t.toISOString().split("T")[0];
 
       const decryptedMagic = decryptData(dailyTries[0].magic);

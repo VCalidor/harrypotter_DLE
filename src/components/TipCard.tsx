@@ -34,12 +34,14 @@ const TipCard = ({
   icon,
   content,
   minTries,
+  tipText,
 }: {
   selectedCharacters: any[];
   icon: any;
   content: string[];
   hit: boolean;
   minTries: number;
+  tipText: string;
 }) => {
   const [tip, setTip] = useState<boolean>(false);
   const [showTip, setShowTip] = useState<boolean>(false);
@@ -63,16 +65,21 @@ const TipCard = ({
 
   return (
     <VStack
+      position={"relative"}
       key={`${showTip}${content[0]}Tip`}
-      border={"solid 2px white"}
+      border={"solid 4px white"}
+      borderBottom={"solid 4px rgba(173, 173, 173	)"}
+      borderRight={"solid 4px rgba(	173, 173, 173	)"}
       borderRadius={4}
       w={"40%"}
       minWidth={100}
       height={80}
       color={"black"}
-      background={"rgba(255, 255, 255)"}
+      background={"rgba(230, 230, 230)"}
+      transition={".2s"}
       _hover={{
         cursor: tip ? "pointer" : "",
+        transform: tip ? "scale(1.1)" : "",
       }}
       animation={tip ? animate : ""}
       justifyContent={"center"}
@@ -100,7 +107,27 @@ const TipCard = ({
           );
         })
       ) : (
-        <Icon as={icon} boxSize={36} />
+        <>
+          <Icon as={icon} boxSize={32} />
+          <Icon
+            boxSize={36}
+            as={icon}
+            position={"absolute"}
+            middle={0}
+            opacity={0.7}
+            filter="blur(2px)"
+            color={"rgb(60,60,60)"}
+          />
+          <Text
+            position={"absolute"}
+            bottom={-8}
+            fontWeight={"bold"}
+            color={"gray"}
+            fontSize={14}
+          >
+            {tipText}
+          </Text>
+        </>
       )}
     </VStack>
   );

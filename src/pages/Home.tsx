@@ -1,4 +1,6 @@
-import { Button, Flex, HStack, Text, VStack } from "@chakra-ui/react";
+import { Button, Flex, HStack, Icon, Text, VStack } from "@chakra-ui/react";
+import { FaCalendarDays } from "react-icons/fa6";
+import { IoInfiniteSharp } from "react-icons/io5";
 
 import { useNavigate } from "react-router-dom";
 
@@ -38,37 +40,70 @@ const Home = () => {
           justifyContent={"space-around"}
         >
           <Button
-            border={"solid 2px white"}
+            border={"solid 4px white"}
+            borderBottom={"solid 4px gray"}
+            borderRight={"solid 4px gray"}
             borderRadius={4}
             w={"40%"}
             minWidth={100}
             height={80}
             color={"black"}
-            background={"rgba(255, 255, 255)"}
+            background={"rgba(230, 230, 230)"}
             cursor={"pointer"}
             _hover={{ transform: "scale(1.1)" }}
             transition={"0.2s"}
             onClick={() => navigate("/daily-challenge")}
+            position={"relative"}
           >
-            <Text fontSize={16} margin={0} fontWeight={"bold"}>
-              Desafio Diário
+            <Icon as={FaCalendarDays} boxSize={26} />
+            <Icon
+              boxSize={32}
+              as={FaCalendarDays}
+              color={"rgb(60,60,60)"}
+              position={"absolute"}
+              opacity={0.5}
+              filter="blur(2px)"
+            />
+            <Text
+              position={"absolute"}
+              bottom={-8}
+              fontWeight={"bold"}
+              color={"gray"}
+            >
+              Desafio diário
             </Text>
           </Button>
           <Button
-            border={"solid 2px white"}
+            border={"solid 4px white"}
+            borderBottom={"solid 4px rgba(173, 173, 173)"}
+            borderRight={"solid 4px rgba(173, 173, 173)"}
+            background={"rgba(230, 230, 230)"}
             borderRadius={4}
             w={"40%"}
             minWidth={100}
             height={80}
             color={"black"}
-            background={"rgba(255, 255, 255)"}
             cursor={"pointer"}
             _hover={{ transform: "scale(1.1)" }}
             transition={"0.2s"}
             onClick={() => navigate("/infinite-challenge")}
           >
-            <Text fontSize={16} margin={0} fontWeight={"bold"}>
-              Desafio Infinito
+            <Icon as={IoInfiniteSharp} boxSize={40} />
+            <Icon
+              boxSize={44}
+              color={"rgb(60,60,60)"}
+              as={IoInfiniteSharp}
+              position={"absolute"}
+              opacity={0.7}
+              filter="blur(2px)"
+            />
+            <Text
+              position={"absolute"}
+              bottom={-8}
+              fontWeight={"bold"}
+              color={"gray"}
+            >
+              Desafio infinito
             </Text>
           </Button>
         </HStack>

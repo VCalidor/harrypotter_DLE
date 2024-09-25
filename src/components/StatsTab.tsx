@@ -62,11 +62,11 @@ const StatsTab = ({ isDaily, hit }: { isDaily: boolean; hit: boolean }) => {
 
   const getDailyFire = (fi: FireData[]) => {
     const today = new Date();
-    today.setHours(today.getHours() - 2);
+    today.setHours(today.getHours() - 5);
 
     const yesterday = new Date();
     yesterday.setDate(today.getDate() - 1);
-    today.setHours(yesterday.getHours() - 2);
+    today.setHours(yesterday.getHours() - 5);
 
     let latestDay: string;
 

@@ -49,6 +49,7 @@ const Tips = ({
           hit={hit}
           icon={IoSkull}
           minTries={3}
+          tipText="Está vivo ou morto?"
         />
         <TipCard
           selectedCharacters={selectedCharacters}
@@ -56,6 +57,7 @@ const Tips = ({
           hit={hit}
           icon={FaWandSparkles}
           minTries={8}
+          tipText="Qual é a varinha?"
         />
       </HStack>
     </Flex>

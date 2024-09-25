@@ -177,8 +177,8 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
           onClick={() => navigate("/")}
           fontSize={26}
           color={"black"}
-          border={"none"}
-          bg={"white"}
+          border={"solid 4px white"}
+          background={"rgba(230, 230, 230)"}
           borderRadius={"100%"}
           padding={4}
           cursor={"pointer"}
@@ -196,6 +196,7 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
             left={2}
             opacity={0.7}
             filter="blur(2px)"
+            color={"rgb(60,60,60)"}
           />
         </Button>
       </HStack>
@@ -239,8 +240,17 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
             animate={animate}
           />
           {isDaily && (
-            <HStack position={"relative"} paddingLeft={12} paddingY={8} paddingRight={30} background={"rgba(0, 0, 0, .6)"} rounded={6}>
-              <Text fontSize={16} m={0}>Personagem de ontem:</Text>
+            <HStack
+              position={"relative"}
+              paddingLeft={12}
+              paddingY={8}
+              paddingRight={30}
+              background={"rgba(0, 0, 0, .6)"}
+              rounded={6}
+            >
+              <Text fontSize={16} m={0}>
+                Personagem de ontem:
+              </Text>
               <Text
                 as="span"
                 color={"yellow"}
@@ -250,12 +260,19 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
               >
                 {yesterdayCharacter.name}
               </Text>
-              <Text fontSize={12} position={"absolute"} right={4} top={12} color={"gray"} fontWeight={"bold"}>
+              <Text
+                fontSize={12}
+                position={"absolute"}
+                right={4}
+                top={12}
+                color={"gray"}
+                fontWeight={"bold"}
+              >
                 dia#{yesterdayCharacter.number}
               </Text>
             </HStack>
           )}
-          {(false) && (
+          {(hit || alreadyHit) && (
             <>
               <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay
