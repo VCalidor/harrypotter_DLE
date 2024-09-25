@@ -18,3 +18,8 @@ export interface Character {
   first_appearance: [string, number];
   image: string;
 }
+
+export interface YesterdayCharacter {
+  name: string;
+  number: number;
+}

@@ -163,9 +163,9 @@ const HitCharacter = ({
       {isDaily ? (
         <Box>
           <Text margin={0} fontSize={24}>
-            Próximo personagem em:
+            Próximo personagem em aproximadamente:
           </Text>
-          <Text margin={0} fontSize={24} fontWeight={"bold"}>
+          <Text marginBottom={0} fontSize={24} fontWeight={"bold"}>
             {formatTime(time)}
           </Text>
         </Box>

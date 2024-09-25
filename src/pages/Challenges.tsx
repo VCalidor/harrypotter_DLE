@@ -20,7 +20,7 @@ import SelectedCharactersList from "../components/SelectedCharactersList";
 import HitCharacter from "../components/HitCharacter";
 import StatsTab from "../components/StatsTab";
 import Tips from "../components/Tips";
-import { Character } from "../interfaces";
+import { Character, YesterdayCharacter } from "../interfaces";
 import { useMyContext } from "../context";
 
 const getRandomCharacter = (characters: Character[]) => {
@@ -52,6 +52,8 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
     first_appearance: ["", 0],
     image: "",
   });
+  const [yesterdayCharacter, setYesterdayCharacter] =
+    useState<YesterdayCharacter>({ name: "", number: 0 });
   const [hits, setHits] = useState(0);
 
   const navigate = useNavigate();
@@ -88,10 +90,13 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const data: Character = await response.json();
+      const data: { tdCharacter: Character; ydCharacter: YesterdayCharacter } =
+        await response.json();
 
-      dailyTries[0]?.character.name === data.name && setAlreadyHit(true);
-      setChosenCharacter(data);
+      dailyTries[0]?.character.name === data.tdCharacter.name &&
+        setAlreadyHit(true);
+      setChosenCharacter(data.tdCharacter);
+      setYesterdayCharacter(data.ydCharacter);
     } catch (error) {
       console.error("Erro ao buscar o personagem:", error);
     }
@@ -233,7 +238,24 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
             selectedCharacters={selectedCharacters}
             animate={animate}
           />
-          {(hit || alreadyHit) && (
+          {isDaily && (
+            <HStack position={"relative"} paddingLeft={12} paddingY={8} paddingRight={30} background={"rgba(0, 0, 0, .6)"} rounded={6}>
+              <Text fontSize={16} m={0}>Personagem de ontem:</Text>
+              <Text
+                as="span"
+                color={"yellow"}
+                fontWeight={"bold"}
+                fontSize={24}
+                m={0}
+              >
+                {yesterdayCharacter.name}
+              </Text>
+              <Text fontSize={12} position={"absolute"} right={4} top={12} color={"gray"} fontWeight={"bold"}>
+                dia#{yesterdayCharacter.number}
+              </Text>
+            </HStack>
+          )}
+          {(false) && (
             <>
               <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay
@@ -256,16 +278,18 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
                   </ModalBody>
                 </ModalContent>
               </Modal>
-              <HitCharacter
-                onOpen={onOpen}
-                onClose={onClose}
-                isModal={false}
-                chosenCharacter={chosenCharacter}
-                hits={hits}
-                tries={selectedCharacters.length + 1}
-                isDaily={isDaily}
-                restartChallenge={restartChallenge}
-              />
+              {!isOpen && (
+                <HitCharacter
+                  onOpen={onOpen}
+                  onClose={onClose}
+                  isModal={false}
+                  chosenCharacter={chosenCharacter}
+                  hits={hits}
+                  tries={selectedCharacters.length + 1}
+                  isDaily={isDaily}
+                  restartChallenge={restartChallenge}
+                />
+              )}
             </>
           )}
         </>
