@@ -288,8 +288,11 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
                       isModal={true}
                       chosenCharacter={chosenCharacter}
                       hits={
-                        JSON.parse(localStorage.getItem("dailyFire") || "{}")[0]
-                          .position
+                        isDaily
+                          ? JSON.parse(
+                              localStorage.getItem("dailyFire") || "{}"
+                            )[0].position
+                          : hits
                       }
                       tries={selectedCharacters.length + 1}
                       isDaily={isDaily}
@@ -305,8 +308,10 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
                   isModal={false}
                   chosenCharacter={chosenCharacter}
                   hits={
-                    JSON.parse(localStorage.getItem("dailyFire") || "{}")[0]
-                      .position
+                    isDaily
+                      ? JSON.parse(localStorage.getItem("dailyFire") || "{}")[0]
+                          .position
+                      : hits
                   }
                   tries={selectedCharacters.length + 1}
                   isDaily={isDaily}
