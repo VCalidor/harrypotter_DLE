@@ -38,7 +38,10 @@ export const MyProvider = ({ children }: { children: React.ReactNode }) => {
       localStorage.setItem("infiniteFire", JSON.stringify(result));
     }
     if (dailyTries.length > 0 && typeof dailyTries[0].magic === "string") {
-      const today = new Date().toISOString().split("T")[0];
+      const t = new Date();
+      t.setHours(t.getHours() - 2);
+      const today = t.toISOString().split("T")[0];
+
       const decryptedMagic = decryptData(dailyTries[0].magic);
       if (decryptedMagic !== today || checkIfIsValid(decryptedMagic))
         localStorage.removeItem("dailyTries");

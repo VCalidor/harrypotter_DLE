@@ -65,11 +65,9 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
   }, []);
 
   useEffect(() => {
-    hit && postHit();
-  }, [hit]);
-
-  useEffect(() => {
-    onOpen();
+    setTimeout(() => {
+      onOpen();
+    }, 1000);
   }, [hit || alreadyHit]);
 
   const getChosenCharacter = async () => {
@@ -136,6 +134,7 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
       const data: number = await response.json();
 
       setHits(data);
+      return data;
     } catch (error) {
       console.error("Erro ao buscar os personagens:", error);
     }
@@ -223,18 +222,18 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
                 setHit={setHit}
                 chosenCharacter={chosenCharacter}
                 isDaily={isDaily}
+                postHit={postHit}
               />
             </VStack>
           )}
-          <Text margin={0}>{hits} pessoas ja descobriram!</Text>
+          <Text margin={0}>{hits} pessoas já descobriram!</Text>
           <SelectedCharactersList
             chosenCharacter={chosenCharacter}
             lastAddedCharacter={lastAddedCharacter}
             selectedCharacters={selectedCharacters}
             animate={animate}
           />
-          {/* {(hit || alreadyHit) && ( */}
-          {true && (
+          {(hit || alreadyHit) && (
             <>
               <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay

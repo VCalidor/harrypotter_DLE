@@ -23,6 +23,7 @@ const CharacterInput = ({
   setHit,
   chosenCharacter,
   isDaily,
+  postHit,
 }: {
   selectedCharacters: Character[];
   setSelectedCharacters: any;
@@ -32,6 +33,7 @@ const CharacterInput = ({
   setHit: any;
   chosenCharacter: Character;
   isDaily: boolean;
+  postHit: any;
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { allCharacters } = useMyContext();
@@ -78,7 +80,7 @@ const CharacterInput = ({
     }
   }, [input]);
 
-  function selectCharacter(character: Character) {
+  const selectCharacter = (character: Character) => {
     if (!isLoading) {
       setIsLoading(true);
       setRemainingCharacters(
@@ -96,22 +98,33 @@ const CharacterInput = ({
             localStorage.getItem("dailyTries") || "[]"
           );
 
+          const today = new Date();
+          today.setHours(today.getHours() - 2);
+
           dailyTries.unshift({
             character,
-            magic: encryptData(new Date().toISOString().split("T")[0]),
+            magic: encryptData(today.toISOString().split("T")[0]),
           });
 
           localStorage.setItem("dailyTries", JSON.stringify(dailyTries));
         }
 
-        setTimeout(() => {
+        setTimeout(async () => {
           setIsLoading(false);
 
           if (character.name === chosenCharacter.name) {
-            const fire: { character: object; magic: string }[] = JSON.parse(
+            const fire: {
+              character: object;
+              magic: string;
+              position: string;
+            }[] = JSON.parse(
               localStorage.getItem(isDaily ? "dailyFire" : "infiniteFire") ||
                 "[]"
             );
+
+            const today = new Date();
+            today.setHours(today.getHours() - 2);
+            const position = await postHit();
 
             fire.unshift({
               character: {
@@ -119,7 +132,8 @@ const CharacterInput = ({
                 alternate_names: character.alternate_names,
                 image: character.image,
               },
-              magic: encryptData(new Date().toISOString().split("T")[0]),
+              magic: encryptData(today.toISOString().split("T")[0]),
+              position,
             });
 
             localStorage.setItem(
@@ -134,7 +148,7 @@ const CharacterInput = ({
       setInput("");
       onClose();
     }
-  }
+  };
 
   function charactersList() {
     if (filteredCharacters.length > 0) {
