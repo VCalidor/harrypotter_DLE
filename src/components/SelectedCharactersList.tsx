@@ -35,15 +35,15 @@ const SelectedCharactersList = ({
   animate: boolean;
 }) => {
   return (
-    <Flex as="main" flexDirection={"column"} gap={12}>
-      <HStack gap={12}>
+    <VStack gap={"1rem"}>
+      <HStack gap={"1rem"} fontSize={".85rem"}>
         {atributes.map((atribute, index) => {
           return (
             <Flex
               key={`atribute_${index}`}
-              width={100}
-              height={60}
               borderBottom={"solid 4px white"}
+              width={"6.2rem"}
+              height={"4rem"}
             >
               <Text margin={"auto"}>{atribute}</Text>
             </Flex>
@@ -71,7 +71,7 @@ const SelectedCharactersList = ({
           );
         })}
       </VStack>
-    </Flex>
+    </VStack>
   );
 };
 

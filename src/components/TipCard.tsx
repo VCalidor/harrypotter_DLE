@@ -1,4 +1,4 @@
-import { Icon, keyframes, Text, VStack } from "@chakra-ui/react";
+import { Button, Icon, keyframes, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 const newTip = keyframes`
@@ -64,23 +64,10 @@ const TipCard = ({
   }, [hit]);
 
   return (
-    <VStack
+    <Button
       position={"relative"}
       key={`${showTip}${content[0]}Tip`}
-      border={"solid 4px white"}
-      borderBottom={"solid 4px rgba(173, 173, 173	)"}
-      borderRight={"solid 4px rgba(	173, 173, 173	)"}
-      borderRadius={4}
-      w={"40%"}
-      minWidth={100}
-      height={80}
-      color={"black"}
-      background={"rgba(230, 230, 230)"}
-      transition={".2s"}
-      _hover={{
-        cursor: tip ? "pointer" : "",
-        transform: tip ? "scale(1.1)" : "",
-      }}
+      variant="buttonVariant"
       animation={tip ? animate : ""}
       justifyContent={"center"}
       gap={2}
@@ -101,35 +88,39 @@ const TipCard = ({
       {showTip ? (
         content.map((c) => {
           return (
-            <Text fontSize={content.length > 2 ? 14 : 18} margin={0}>
+            <Text
+              fontSize={".8rem"}
+              margin={0}
+              textShadow=".5px .5px 0 rgba(0, 0, 0, .4)"
+            >
               {c}
             </Text>
           );
         })
       ) : (
         <>
-          <Icon as={icon} boxSize={32} />
+          <Icon as={icon} boxSize={"2rem"} />
           <Icon
-            boxSize={36}
+            boxSize={"2.2rem"}
+            color={"rgb(60,60,60)"}
             as={icon}
             position={"absolute"}
-            middle={0}
             opacity={0.7}
             filter="blur(2px)"
-            color={"rgb(60,60,60)"}
           />
           <Text
             position={"absolute"}
-            bottom={-8}
+            bottom={".3rem"}
             fontWeight={"bold"}
+            fontSize={".8rem"}
             color={"gray"}
-            fontSize={14}
+            textShadow=".5px .5px 0 rgba(0, 0, 0, .4)"
           >
             {tipText}
           </Text>
         </>
       )}
-    </VStack>
+    </Button>
   );
 };
 

@@ -5,7 +5,7 @@ import { ImArrowUp } from "react-icons/im";
 const AtributeCard = ({
   atributes,
   chosenCharacterAtribute,
-  time,
+  time, 
   isNew = false,
   character,
   moreOrLess = false,
@@ -23,15 +23,17 @@ const AtributeCard = ({
 }) => {
   const [opacity, setOpacity] = useState(isNew ? 0 : 1);
   const [uod, setUod] = useState(0);
+  const [transform, setTransform] = useState(
+    isNew ? "translateY(-30px) scale(0.8) rotate(10deg)" : ""
+  );
 
   useEffect(() => {
-    if (isNew) {
-      setTimeout(() => {
-        setOpacity(1);
-      }, time * 700);
-    }
+    setTimeout(() => {
+      setOpacity(1);
+      setTransform("translateY(0) scale(1) rotate(0deg)");
+    }, time * 700);
     if (moreOrLess) upOrDown();
-  }, []);
+  }, [isNew, time, moreOrLess]);
 
   function greenRedOrOrange() {
     const color = atributes.map((atribute) => {
@@ -67,27 +69,33 @@ const AtributeCard = ({
 
   return (
     <Flex
-      zIndex={0}
       key={character.name}
-      width={100}
-      height={90}
+      width={"6.2rem"}
+      height={"5.6rem"}
       flexDirection={"column"}
       bg={greenRedOrOrange()}
       borderRadius={4}
-      transition={".7s"}
+      transition="transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.7s ease"
       opacity={opacity}
-      transform={`scale(${opacity})`}
+      transform={transform} // Aplica a transformação com deslizamento e rotação
       justifyContent={"space-evenly"}
       position={"relative"}
       alignItems={"center"}
-      _hover={{ transform: "scale(1.1)", transition: ".3s" }}
+      _hover={{ transform: "scale(1.1) rotate(2deg)", transition: ".3s" }}
+      paddingX={"2px"}
     >
       {atributes.map((atribute, index) => (
         <Text
+          color={"#f0e68c"}
           key={`atribute_${index}`}
           margin={0}
-          marginX={3}
-          fontSize={atributes.length < 4 ? 16 : atributes.length == 4 ? 11 : 10}
+          fontSize={
+            atributes.length < 4
+              ? ".85rem"
+              : atributes.length === 4
+              ? ".6rem"
+              : ".5.5rem"
+          }
         >
           {atribute} {estimated ? "+/-" : ""}{" "}
         </Text>

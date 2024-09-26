@@ -18,7 +18,7 @@ const SelectedCharactersComponent = ({
   isNew?: boolean;
 }) => {
   return (
-    <HStack gap={12} key={`selectedCharacter_${index + 1}`}>
+    <HStack gap={"1rem"} key={`selectedCharacter_${index + 1}`}>
       <CharacterImageCard
         imgSrc={character.image}
         name={character.name}

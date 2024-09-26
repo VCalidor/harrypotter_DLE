@@ -1,0 +1,142 @@
+import { Box, Stack, Text } from "@chakra-ui/react";
+import CharacterImageCard from "./CharacterImageCard";
+import AtributeCard from "./AtributeCard";
+
+const getCharacter = () => {
+  const allCharacters = JSON.parse(
+    localStorage.getItem("allCharacters") || "[]"
+  );
+  return allCharacters.length > 0 ? allCharacters[0] : null;
+};
+
+const atributesFunc = (atribute: {
+  atribute: string;
+  description: string;
+  example: string;
+  exampleCard: React.ReactNode;
+}) => {
+  return (
+    <Stack w={"100%"}>
+      <Text as={"h4"} margin={0} fontSize={18} w={"100%"} color={"white"}>
+        {atribute.atribute}
+      </Text>
+      <Text as={"span"} margin={0} fontSize={14} color={"white"} marginLeft={8}>
+        {atribute.description}
+      </Text>
+      <Text as={"span"} margin={0} fontSize={14} color={"gray"} marginLeft={12}>
+        {atribute.example}
+      </Text>
+      {atribute.exampleCard}
+    </Stack>
+  );
+};
+
+const HowToPlayTooltip = () => {
+  const character = getCharacter();
+
+  if (!character) {
+    return (
+      <Stack w={"100%"} textAlign={"left"} color={"white"}>
+        <Text as={"h3"} margin={0} fontSize={26} w={"100%"}>
+          Carregando...
+        </Text>
+      </Stack>
+    );
+  }
+
+  const atributes = [
+    {
+      atribute: "Personagem",
+      description: "Nome e imagem do personagem.",
+      example: "Por exemplo: Harry Potter, Sirius Black, Hermione Granger...",
+      exampleCard: (
+        <Stack gap={0} marginLeft={12}>
+          <CharacterImageCard imgSrc={character.image} name={character.name} />
+          <Text fontSize={12} color={"gray"} margin={0}>
+            Passe o mouse sobre a imagem para ver mais detalhes*
+          </Text>
+        </Stack>
+      ),
+    },
+    {
+      atribute: "Espécie",
+      description: "Classificação da espécie a qual o personagem pertence.",
+      example: "Por exemplo: Humano, Gigante, Elfo Doméstico, Dragão...",
+      exampleCard: (
+        <Box marginLeft={12}>
+          <AtributeCard
+            atributes={character.species}
+            character={character}
+            time={0}
+            chosenCharacterAtribute={character.species}
+          />
+        </Box>
+      ),
+    },
+    {
+      atribute: "Gênero",
+      description: "Gênero do personagem, se disponível.",
+      example: "Por exemplo: Masculino, Feminino, Não Tem, Desconhecido...",
+      exampleCard: (
+        <Box marginLeft={12}>
+          <AtributeCard
+            atributes={character.gender}
+            character={character}
+            time={0}
+            chosenCharacterAtribute={character.gender}
+          />
+        </Box>
+      ),
+    },
+    {
+      atribute: "Casa",
+      description: "Casa de Hogwarts à qual o personagem pertence.",
+      example: "Por exemplo: Grifinória, Sonserina, Corvinal, Lufa-Lufa...",
+      exampleCard: (
+        <Box marginLeft={12}>
+          <AtributeCard
+            atributes={character.house}
+            character={character}
+            time={0}
+            chosenCharacterAtribute={character.house}
+          />
+        </Box>
+      ),
+    },
+    {
+      atribute: "Ano de Nascimento",
+      description: "O ano de nascimento do personagem, se disponível.",
+      example:
+        "Por exemplo: 1980 para Harry Potter, 1926 para Newt Scamander...",
+      exampleCard: (
+        <Box marginLeft={12}>
+          <AtributeCard
+            atributes={character.birth_year}
+            character={character}
+            time={0}
+            chosenCharacterAtribute={character.birth_year}
+          />
+        </Box>
+      ),
+    },
+  ];
+
+  return (
+    <Stack w={"100%"} textAlign={"left"}>
+      <Text
+        as={"h3"}
+        margin={0}
+        fontSize={26}
+        w={"100%"}
+        borderBottom={"solid 1px white"}
+      >
+        Atributos
+      </Text>
+      <Stack paddingLeft={12} paddingTop={12}>
+        {atributes.map((atribute) => atributesFunc(atribute))}
+      </Stack>
+    </Stack>
+  );
+};
+
+export default HowToPlayTooltip;

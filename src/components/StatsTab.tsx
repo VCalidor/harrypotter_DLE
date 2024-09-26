@@ -1,8 +1,10 @@
 import { Box, HStack, Icon, keyframes, Text, Tooltip } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { AiFillFire } from "react-icons/ai";
-import { BsFillBarChartFill, BsInfoCircle } from "react-icons/bs";
+import { BsFillBarChartFill } from "react-icons/bs";
 import { decryptData } from "../utils";
+import CustomTooltip from "./CustomTooltip";
+import HowToPlayTooltip from "./HowToPlayTooltip";
 
 const flaming = keyframes`
   0% {
@@ -102,22 +104,14 @@ const StatsTab = ({ isDaily, hit }: { isDaily: boolean; hit: boolean }) => {
 
   return (
     <HStack
-      gap={16}
+      gap={"1rem"}
       backgroundColor="rgba(0, 0, 0, 0.6)"
-      padding={6}
-      paddingX={12}
+      padding={".5rem"}
+      paddingX={"1rem"}
       paddingBottom={0}
       rounded={6}
     >
-      <Tooltip
-        label={
-          <Box bg={"red"} padding={8} borderRadius={4} color={"white"}>
-            <Text margin={6}>Estatísticas</Text>
-          </Box>
-        }
-        hasArrow
-        zIndex="tooltip"
-      >
+      <Tooltip label={"Estatísticas"} hasArrow zIndex="tooltip">
         <Box
           color={"grey"}
           transition="0.2s"
@@ -132,7 +126,6 @@ const StatsTab = ({ isDaily, hit }: { isDaily: boolean; hit: boolean }) => {
         </Box>
       </Tooltip>
       <Box
-        fontSize={36}
         color={fire.length > 0 ? "red" : "grey"}
         position={"relative"}
         transition="0.2s"
@@ -141,40 +134,20 @@ const StatsTab = ({ isDaily, hit }: { isDaily: boolean; hit: boolean }) => {
           fire.length > 0 ? `${flaming} 1.5s ease-in-out infinite` : ""
         }
       >
-        <Icon as={AiFillFire} />
+        <Icon as={AiFillFire} boxSize={"2.2rem"} />
         <Text
           position={"absolute"}
           color={"white"}
-          fontSize={14}
-          top={0}
-          right={0}
-          left={0}
+          fontSize={".9rem"}
+          top={".8rem"}
+          right={".9rem"}
         >
           {fire.length}
         </Text>
       </Box>
-      <Tooltip
-        label={
-          <Box bg={"red"} padding={8} borderRadius={4} color={"white"}>
-            <Text margin={6}>Como Jogar</Text>
-          </Box>
-        }
-        hasArrow
-        zIndex="tooltip"
-      >
-        <Box
-          transition="0.2s"
-          color={"grey"}
-          fontSize={32}
-          _hover={{
-            color: "white",
-            cursor: "pointer",
-            transform: "scale(1.2)",
-          }}
-        >
-          <Icon as={BsInfoCircle} />
-        </Box>
-      </Tooltip>
+      <CustomTooltip title="Como Jogar">
+        <HowToPlayTooltip />
+      </CustomTooltip>
     </HStack>
   );
 };

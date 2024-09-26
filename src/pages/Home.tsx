@@ -1,63 +1,42 @@
-import { Button, Flex, HStack, Icon, Text, VStack } from "@chakra-ui/react";
+import { Button, HStack, Icon, Text, VStack } from "@chakra-ui/react";
 import { FaCalendarDays } from "react-icons/fa6";
 import { IoInfiniteSharp } from "react-icons/io5";
 
 import { useNavigate } from "react-router-dom";
+import PageLayout from "../components/PageLayout";
 
 const Home = () => {
   const navigate = useNavigate();
 
   return (
-    <VStack
-      w={"100%"}
-      paddingTop={50}
-      color={"white"}
-      textAlign={"center"}
-      gap={24}
-      marginBottom={120}
-    >
-      <Text as="h1" margin={0}>
-        Mundo Bruxo
-      </Text>
-      <Flex
-        maxW={400}
+    <PageLayout>
+      <VStack
+        maxW={500}
         width={"80%"}
         backgroundColor="rgba(0, 0, 0, 0.6)"
         borderRadius={6}
         alignItems={"center"}
         flexDirection={"column"}
-        padding={16}
-        paddingY={32}
-        gap={26}
+        padding={"1.5rem"}
+        paddingY={"2rem"}
+        gap={"1.5rem"}
       >
-        <Text fontSize={20} margin={0}>
-          Escolha o modo!
-        </Text>
-        <HStack
-          gap={16}
-          w={"100%"}
-          flexWrap={"wrap"}
-          justifyContent={"space-around"}
+        <Text
+          fontSize={"1.2rem"}
+          margin={0}
+          textShadow="2px 2px 0 rgba(0, 0, 0, .7)"
         >
+          Escolha o desafio!
+        </Text>
+        <HStack w={"100%"} flexWrap={"wrap"} justifyContent={"space-around"}>
           <Button
-            border={"solid 4px white"}
-            borderBottom={"solid 4px gray"}
-            borderRight={"solid 4px gray"}
-            borderRadius={4}
-            w={"40%"}
-            minWidth={100}
-            height={80}
-            color={"black"}
-            background={"rgba(230, 230, 230)"}
-            cursor={"pointer"}
-            _hover={{ transform: "scale(1.1)" }}
-            transition={"0.2s"}
+            variant="buttonVariant"
             onClick={() => navigate("/daily-challenge")}
             position={"relative"}
           >
-            <Icon as={FaCalendarDays} boxSize={26} />
+            <Icon as={FaCalendarDays} boxSize={"1.8rem"} />
             <Icon
-              boxSize={32}
+              boxSize={"2rem"}
               as={FaCalendarDays}
               color={"rgb(60,60,60)"}
               position={"absolute"}
@@ -66,31 +45,22 @@ const Home = () => {
             />
             <Text
               position={"absolute"}
-              bottom={-8}
+              bottom={".3rem"}
               fontWeight={"bold"}
+              fontSize={".8rem"}
               color={"gray"}
+              textShadow=".5px .5px 0 rgba(0, 0, 0, .4)"
             >
               Desafio diário
             </Text>
           </Button>
           <Button
-            border={"solid 4px white"}
-            borderBottom={"solid 4px rgba(173, 173, 173)"}
-            borderRight={"solid 4px rgba(173, 173, 173)"}
-            background={"rgba(230, 230, 230)"}
-            borderRadius={4}
-            w={"40%"}
-            minWidth={100}
-            height={80}
-            color={"black"}
-            cursor={"pointer"}
-            _hover={{ transform: "scale(1.1)" }}
-            transition={"0.2s"}
+            variant="buttonVariant"
             onClick={() => navigate("/infinite-challenge")}
           >
-            <Icon as={IoInfiniteSharp} boxSize={40} />
+            <Icon as={IoInfiniteSharp} boxSize={"2.8rem"} />
             <Icon
-              boxSize={44}
+              boxSize={"3rem"}
               color={"rgb(60,60,60)"}
               as={IoInfiniteSharp}
               position={"absolute"}
@@ -99,16 +69,18 @@ const Home = () => {
             />
             <Text
               position={"absolute"}
-              bottom={-8}
+              bottom={".3rem"}
               fontWeight={"bold"}
+              fontSize={".8rem"}
               color={"gray"}
+              textShadow=".5px .5px 0 rgba(0, 0, 0, .4)"
             >
               Desafio infinito
             </Text>
           </Button>
         </HStack>
-      </Flex>
-    </VStack>
+      </VStack>
+    </PageLayout>
   );
 };
 

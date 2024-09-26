@@ -1,4 +1,4 @@
-import { Flex, HStack, Text } from "@chakra-ui/react";
+import { HStack, Text, VStack } from "@chakra-ui/react";
 import { IoSkull } from "react-icons/io5";
 import { FaWandSparkles } from "react-icons/fa6";
 
@@ -17,19 +17,23 @@ const Tips = ({
   hit: boolean;
 }) => {
   return (
-    <Flex
-      maxW={400}
+    <VStack
+      maxW={500}
       width={"80%"}
       backgroundColor="rgba(0, 0, 0, 0.6)"
       borderRadius={6}
       alignItems={"center"}
       flexDirection={"column"}
-      padding={16}
-      paddingY={32}
-      gap={26}
+      padding={"1.5rem"}
+      paddingY={"2rem"}
+      gap={"1.5rem"}
     >
-      <Text fontSize={20} margin={0}>
-        ADIVINHE QUAL É O PERSONAGEM{isDaily ? " DE HOJE" : ""}!
+      <Text
+        fontSize={"1.2rem"}
+        margin={0}
+        textShadow="2px 2px 0 rgba(0, 0, 0, .7)"
+      >
+        Adivinhe qual é o personagem{isDaily ? " DE HOJE" : ""}!
       </Text>
       <HStack
         gap={16}
@@ -60,7 +64,7 @@ const Tips = ({
           tipText="Qual é a varinha?"
         />
       </HStack>
-    </Flex>
+    </VStack>
   );
 };
 
