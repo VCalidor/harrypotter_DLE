@@ -19,7 +19,7 @@ const CharacterImageCard = ({
   useEffect(() => {
     setOpacity(1);
     setTransform("translateY(0) scale(1) rotate(0deg)");
-  }, [  ]);
+  }, []);
 
   return (
     <Flex
@@ -55,9 +55,15 @@ const CharacterImageCard = ({
           borderRadius={4}
           maxWidth={"4rem"}
           h={"4rem"}
-          padding={".2rem"}
+          paddingX={".6rem"}
         >
-          <Text margin={"auto"} fontSize={".6rem"}>
+          <Text
+            margin={"auto"}
+            fontSize={"1.2rem"}
+            fontWeight={"light"}
+            letterSpacing={".1px"}
+            fontFamily={"Harry P"}
+          >
             {name}
           </Text>
         </Center>
