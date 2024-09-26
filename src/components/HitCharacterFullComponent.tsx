@@ -51,9 +51,9 @@ const HitCharacterFullComponent = ({
               margin="auto"
               marginY="5vh"
               borderRadius={8}
-              padding={4}
               maxH="90vh"
               overflowY="auto"
+              bg="none"
             >
               <ModalBody padding={0}>
                 <HitCharacter
@@ -75,7 +75,6 @@ const HitCharacterFullComponent = ({
               </ModalBody>
             </ModalContent>
           </Modal>
-
           {!isOpen && (
             <HitCharacter
               onOpen={onOpen}
@@ -91,6 +90,7 @@ const HitCharacterFullComponent = ({
               tries={selectedCharacters.length + 1}
               isDaily={isDaily}
               restartChallenge={restartChallenge}
+              width="40rem"
             />
           )}
         </>

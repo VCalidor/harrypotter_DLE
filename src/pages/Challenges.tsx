@@ -159,7 +159,6 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
             />
           )}
           <Text
-            margin={0}
             fontSize={".8rem"}
             textShadow=".5px .5px 0 rgba(0, 0, 0, .4)"
           >
@@ -177,7 +176,7 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
               paddingLeft={"1rem"}
               paddingY={".6rem"}
               paddingRight={"2.1rem"}
-              background={"rgba(0, 0, 0, .6)"}
+              backgroundColor="rgb(11, 9, 13, .7)"
               rounded={6}
             >
               <Text fontSize={".9rem"} m={0}>
@@ -185,7 +184,7 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
               </Text>
               <Text
                 as="span"
-                color={"yellow"}
+                color={"#AF811E"}
                 fontWeight={"bold"}
                 fontSize={"1.4rem"}
                 m={0}
@@ -197,7 +196,7 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
                 position={"absolute"}
                 right={0}
                 bottom={".5rem"}
-                color={"gray"}
+                color={"#A69EB8"}
                 fontWeight={"bold"}
               >
                 dia#{yesterdayCharacter.number}

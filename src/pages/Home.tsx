@@ -13,7 +13,7 @@ const Home = () => {
       <VStack
         maxW={500}
         width={"80%"}
-        backgroundColor="rgba(0, 0, 0, 0.6)"
+        backgroundColor="rgb(11, 9, 13, .7)"
         borderRadius={6}
         alignItems={"center"}
         flexDirection={"column"}
@@ -21,11 +21,7 @@ const Home = () => {
         paddingY={"2rem"}
         gap={"1.5rem"}
       >
-        <Text
-          fontSize={"1.2rem"}
-          margin={0}
-          textShadow="2px 2px 0 rgba(0, 0, 0, .7)"
-        >
+        <Text fontSize={"1.2rem"} textShadow="2px 2px 0 rgba(0, 0, 0, .7)">
           Escolha o desafio!
         </Text>
         <HStack w={"100%"} flexWrap={"wrap"} justifyContent={"space-around"}>
@@ -34,11 +30,11 @@ const Home = () => {
             onClick={() => navigate("/daily-challenge")}
             position={"relative"}
           >
-            <Icon as={FaCalendarDays} boxSize={"1.8rem"} />
+            <Icon as={FaCalendarDays} boxSize={"1.8rem"} color={"#0B090D"} />
             <Icon
               boxSize={"2rem"}
               as={FaCalendarDays}
-              color={"rgb(60,60,60)"}
+              color={"#0B090D"}
               position={"absolute"}
               opacity={0.5}
               filter="blur(2px)"
@@ -48,8 +44,8 @@ const Home = () => {
               bottom={".3rem"}
               fontWeight={"bold"}
               fontSize={".8rem"}
-              color={"gray"}
-              textShadow=".5px .5px 0 rgba(0, 0, 0, .4)"
+              color={"#867F83"}
+              textShadow="1px 1px 0 #332F40"
             >
               Desafio diário
             </Text>
@@ -58,10 +54,10 @@ const Home = () => {
             variant="buttonVariant"
             onClick={() => navigate("/infinite-challenge")}
           >
-            <Icon as={IoInfiniteSharp} boxSize={"2.8rem"} />
+            <Icon as={IoInfiniteSharp} boxSize={"2.8rem"} color={"#0B090D"} />
             <Icon
               boxSize={"3rem"}
-              color={"rgb(60,60,60)"}
+              color={"#0B090D"}
               as={IoInfiniteSharp}
               position={"absolute"}
               opacity={0.7}
@@ -72,8 +68,8 @@ const Home = () => {
               bottom={".3rem"}
               fontWeight={"bold"}
               fontSize={".8rem"}
-              color={"gray"}
-              textShadow=".5px .5px 0 rgba(0, 0, 0, .4)"
+              color={"#867F83"}
+              textShadow="1px 1px 0 #332F40"
             >
               Desafio infinito
             </Text>

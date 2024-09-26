@@ -10,40 +10,42 @@ const theme = extendTheme({
       "html, body": {
         fontFamily: "'Merriweather', sans-serif",
         scrollbarWidth: "thin",
-        scrollbarColor: "#888 transparent", // Para Firefox
+        scrollbarColor: "#888 transparent",
+        color: "#F7F5F3",
+        height: "100%",
+        margin: 0,
+        padding: 0,
       },
       "::-webkit-scrollbar": {
-        width: "10px", // Largura da barra de rolagem
-        height: "10px", // Para barras de rolagem horizontais, se necessário
+        width: "10px",
+        height: "10px",
       },
       "::-webkit-scrollbar-thumb": {
-        backgroundColor: "#888", // Cor da barra de rolagem
+        backgroundColor: "#888",
         borderRadius: "10px",
-        transition: "background-color 0.2s ease", // Adiciona uma transição suave
+        transition: "background-color 0.2s ease",
       },
       "::-webkit-scrollbar-thumb:hover": {
-        backgroundColor: "#555", // Cor ao passar o mouse
+        backgroundColor: "#555",
       },
       "::-webkit-scrollbar-track": {
-        backgroundColor: "transparent", // Remove o fundo da trilha
+        backgroundColor: "transparent",
       },
     },
-    
-    
   },
   components: {
     Button: {
       variants: {
         buttonVariant: {
-          border: "solid 4px white",
-          borderBottom: "solid 4px gray",
-          borderRight: "solid 4px gray",
+          border: "solid 4px #F7F5F3",
+          borderBottom: "solid 4px #332F40",
+          borderRight: "solid 4px #332F40",
           borderRadius: 4,
           paddingY: "2.4rem",
           w: "40%",
           minWidth: "8rem",
           color: "black",
-          background: "rgba(230, 230, 230)",
+          background: "#D9CEC5",
           cursor: "pointer",
           _hover: { transform: "scale(1.1)" },
           transition: "0.2s",

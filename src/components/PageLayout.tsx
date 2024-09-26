@@ -15,10 +15,8 @@ const PageLayout = ({
     <VStack
       w={"100%"}
       paddingTop={50}
-      color={"white"}
       textAlign={"center"}
       gap={6}
-      marginBottom={"2rem"}
     >
       <HStack
         w={"80%"}
@@ -28,10 +26,9 @@ const PageLayout = ({
       >
         <Heading
           as="h1"
-          margin={0}
           fontSize={"xxx-large"}
           letterSpacing=".03em"
-          textShadow="3px 3px 6px rgba(0, 0, 0, 1)"
+          textShadow="4px 4px 2px rgba(0, 0, 0, 1)"
           textAlign="center"
           flexGrow={1}
         >
@@ -57,13 +54,13 @@ const PageLayout = ({
               boxShadow: "0 0 5px rgba(0, 0, 0, 1)",
             }}
           >
-            <Icon as={GiReturnArrow} />
+            <Icon as={GiReturnArrow} color={"#0B090D"} />
             <Icon
               as={GiReturnArrow}
               position={"absolute"}
               opacity={0.7}
               filter="blur(2px)"
-              color={"rgb(60,60,60)"}
+              color={"#0B090D"}
             />
           </Button>
         )}

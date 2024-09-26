@@ -20,7 +20,7 @@ const Tips = ({
     <VStack
       maxW={500}
       width={"80%"}
-      backgroundColor="rgba(0, 0, 0, 0.6)"
+      backgroundColor="rgb(11, 9, 13, .7)"
       borderRadius={6}
       alignItems={"center"}
       flexDirection={"column"}
@@ -30,7 +30,6 @@ const Tips = ({
     >
       <Text
         fontSize={"1.2rem"}
-        margin={0}
         textShadow="2px 2px 0 rgba(0, 0, 0, .7)"
       >
         Adivinhe qual é o personagem{isDaily ? " DE HOJE" : ""}!

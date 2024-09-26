@@ -47,44 +47,44 @@ const CustomTooltip = ({
           backdropBlur="2px"
         />
         <ModalContent
-          maxW="600px"
-          w="90%"
+          maxW="50rem"
           margin="auto"
           marginY="5vh"
           borderRadius={8}
-          padding={4}
           maxH="90vh"
           overflowY="auto"
+          bg="none"
         >
-          <ModalBody padding={0}>
+          <ModalBody padding={0} w={"100%"}>
             <VStack
-              backgroundColor="rgba(0, 0, 0, .6)"
+              backgroundColor="rgb(11, 9, 13, .7)"
               borderRadius={6}
-              padding={8}
+              padding={"2rem"}
               gap={4}
-              color={"white"}
               textAlign={"center"}
               position={"relative"}
+              w={"100%"}
             >
               <IconButton
                 position={"absolute"}
                 fontSize={24}
-                right={4}
-                top={4}
+                right={"2rem"}
+                top={"2rem"}
                 background={"none"}
                 border={"none"}
-                color={"gray"}
+                color={"#A69EB8"}
                 aria-label="close"
                 icon={<IoMdClose />}
                 onClick={onClose}
                 transition={".2s"}
+                _active={{}}
                 _hover={{
                   transform: "scale(1.2) rotate(90deg)",
                   color: "white",
                   cursor: "pointer",
                 }}
               />
-              <Text as={"h2"} margin={0} fontSize={32}>
+              <Text as={"h2"} fontSize={32}>
                 {title}
               </Text>
               {children}

@@ -17,11 +17,9 @@ const CharacterImageCard = ({
   );
 
   useEffect(() => {
-    setTimeout(() => {
-      setOpacity(1);
-      setTransform("translateY(0) scale(1) rotate(0deg)");
-    }, 700);
-  }, [isNew]);
+    setOpacity(1);
+    setTransform("translateY(0) scale(1) rotate(0deg)");
+  }, [  ]);
 
   return (
     <Flex
@@ -34,6 +32,7 @@ const CharacterImageCard = ({
       transition="transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.7s ease"
       opacity={opacity}
       transform={transform}
+      border={"solid 2px rgb(11, 9, 13, .7)"}
       _hover={{ transform: "scale(1.1) rotate(2deg)", transition: ".3s" }}
     >
       <Image
@@ -52,13 +51,13 @@ const CharacterImageCard = ({
         opacity={isHovering ? 1 : 0}
       >
         <Center
-          background={"yellow"}
+          background={"#181426"}
           borderRadius={4}
           maxWidth={"4rem"}
           h={"4rem"}
           padding={".2rem"}
         >
-          <Text color={"black"} margin={"auto"} fontSize={".6rem"}>
+          <Text margin={"auto"} fontSize={".6rem"}>
             {name}
           </Text>
         </Center>

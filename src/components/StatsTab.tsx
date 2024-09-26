@@ -105,7 +105,7 @@ const StatsTab = ({ isDaily, hit }: { isDaily: boolean; hit: boolean }) => {
   return (
     <HStack
       gap={"1rem"}
-      backgroundColor="rgba(0, 0, 0, 0.6)"
+      backgroundColor="rgb(11, 9, 13, .7)"
       padding={".5rem"}
       paddingX={"1rem"}
       paddingBottom={0}
@@ -126,7 +126,7 @@ const StatsTab = ({ isDaily, hit }: { isDaily: boolean; hit: boolean }) => {
         </Box>
       </Tooltip>
       <Box
-        color={fire.length > 0 ? "red" : "grey"}
+        color={fire.length > 0 ? "#871717" : "grey"}
         position={"relative"}
         transition="0.2s"
         fontWeight="bolder"
@@ -137,10 +137,10 @@ const StatsTab = ({ isDaily, hit }: { isDaily: boolean; hit: boolean }) => {
         <Icon as={AiFillFire} boxSize={"2.2rem"} />
         <Text
           position={"absolute"}
-          color={"white"}
           fontSize={".9rem"}
           top={".8rem"}
           right={".9rem"}
+          color={"#D9CEC5"}
         >
           {fire.length}
         </Text>

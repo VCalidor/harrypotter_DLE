@@ -1,11 +1,12 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, HStack, Icon, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { ImArrowUp } from "react-icons/im";
+import { PiPlusMinusLight } from "react-icons/pi";
 
 const AtributeCard = ({
   atributes,
   chosenCharacterAtribute,
-  time, 
+  time,
   isNew = false,
   character,
   moreOrLess = false,
@@ -42,10 +43,10 @@ const AtributeCard = ({
     });
 
     if (color.every((e) => e === true)) {
-      if (atributes.length === chosenCharacterAtribute.length) return "green";
+      if (atributes.length === chosenCharacterAtribute.length) return "#657F24";
     }
-    if (color.some((e) => e === true)) return "orange";
-    return "red";
+    if (color.some((e) => e === true)) return "#AF811E";
+    return "#871717";
   }
 
   function upOrDown() {
@@ -74,31 +75,33 @@ const AtributeCard = ({
       height={"5.6rem"}
       flexDirection={"column"}
       bg={greenRedOrOrange()}
-      borderRadius={4}
+      rounded={"md"}
       transition="transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.7s ease"
       opacity={opacity}
-      transform={transform} // Aplica a transformação com deslizamento e rotação
+      transform={transform}
       justifyContent={"space-evenly"}
       position={"relative"}
       alignItems={"center"}
       _hover={{ transform: "scale(1.1) rotate(2deg)", transition: ".3s" }}
       paddingX={"2px"}
+      border={"solid 2px rgb(11, 9, 13, .7)"}
     >
       {atributes.map((atribute, index) => (
-        <Text
-          color={"#f0e68c"}
-          key={`atribute_${index}`}
-          margin={0}
-          fontSize={
-            atributes.length < 4
-              ? ".85rem"
-              : atributes.length === 4
-              ? ".6rem"
-              : ".5.5rem"
-          }
-        >
-          {atribute} {estimated ? "+/-" : ""}{" "}
-        </Text>
+        <HStack gap={1}>
+          <Text
+            key={`atribute_${index}`}
+            fontSize={
+              atributes.length < 4
+                ? ".85rem"
+                : atributes.length === 4
+                ? ".6rem"
+                : ".5.5rem"
+            }
+          >
+            {atribute}{" "}
+          </Text>
+          {estimated && <Icon as={PiPlusMinusLight} />}
+        </HStack>
       ))}
       {uod !== 0 && (
         <Box
@@ -107,9 +110,9 @@ const AtributeCard = ({
         >
           <ImArrowUp
             size={80}
-            color={"white"}
             opacity={0.2}
             style={{ alignSelf: "center" }}
+            color="#F6D8AE"
           />
         </Box>
       )}

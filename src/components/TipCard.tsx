@@ -90,8 +90,7 @@ const TipCard = ({
           return (
             <Text
               fontSize={".8rem"}
-              margin={0}
-              textShadow=".5px .5px 0 rgba(0, 0, 0, .4)"
+              textShadow=".5px .5px 0 #332F40"
             >
               {c}
             </Text>
@@ -99,10 +98,10 @@ const TipCard = ({
         })
       ) : (
         <>
-          <Icon as={icon} boxSize={"2rem"} />
+          <Icon as={icon} boxSize={"2rem"} color={"#0B090D"} />
           <Icon
             boxSize={"2.2rem"}
-            color={"rgb(60,60,60)"}
+            color={"#0B090D"}
             as={icon}
             position={"absolute"}
             opacity={0.7}
@@ -113,8 +112,8 @@ const TipCard = ({
             bottom={".3rem"}
             fontWeight={"bold"}
             fontSize={".8rem"}
-            color={"gray"}
-            textShadow=".5px .5px 0 rgba(0, 0, 0, .4)"
+            color={"#867F83"}
+            textShadow="1px 1px 0 #332F40"
           >
             {tipText}
           </Text>

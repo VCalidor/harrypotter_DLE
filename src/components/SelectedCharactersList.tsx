@@ -36,7 +36,7 @@ const SelectedCharactersList = ({
 }) => {
   return (
     <VStack gap={"1rem"}>
-      <HStack gap={"1rem"} fontSize={".85rem"}>
+      <HStack gap={"1rem"} fontSize={".85rem"} color={"#D9CEC5"}>
         {atributes.map((atribute, index) => {
           return (
             <Flex

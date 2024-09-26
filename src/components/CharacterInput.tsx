@@ -162,26 +162,26 @@ const CharacterInput = ({
             minHeight={"3.6rem"}
             transition={"0.2s"}
             paddingX={"1rem"}
-            backgroundColor={
-              selectedCharacter == index
-                ? "rgba(140, 140, 10, 1)"
-                : "rgba(255, 255, 255, 1)"
-            }
+            backgroundColor={selectedCharacter == index ? "#332F40" : "#D9CEC5"}
             cursor={"pointer"}
-            _hover={{ bg: "rgba(200, 200, 160, 1)" }}
+            color={selectedCharacter == index ? "#D9CEC5" : "#0B090D"}
+            _hover={{ bg: "#9C95B1" }}
             onMouseDown={() => {
               selectCharacter(character);
             }}
           >
             <Image src={character.image} boxSize={"2.6rem"} />
-            <Flex color={"black"} flexDirection={"column"} alignItems={"start"}>
-              <Text margin={0} fontSize={".9rem"}>
+            <Flex flexDirection={"column"} alignItems={"start"}>
+              <Text
+                fontSize={"1.2rem"}
+                fontWeight={"light"}
+                letterSpacing={".1px"}
+                fontFamily={"Harry P"}
+              >
                 {character.name}
               </Text>
               {character.alternate_names.length > 0 && (
-                <Text margin={0} color={"black"} fontSize={".6rem"}>
-                  {character.alternate_names[0]}
-                </Text>
+                <Text fontSize={".6rem"}fontWeight={"bold"}>{character.alternate_names[0]}</Text>
               )}
             </Flex>
           </HStack>
@@ -189,11 +189,7 @@ const CharacterInput = ({
       });
     } else
       return (
-        <Flex
-          height={"3rem"}
-          backgroundColor={"rgba(255, 255, 255, 1)"}
-          fontSize={".9rem"}
-        >
+        <Flex height={"3rem"} backgroundColor={"#D9CEC5"} fontSize={".9rem"}>
           <Text color={"black"} margin={"auto"}>
             Nenhum personagem encontrado.
           </Text>
@@ -205,7 +201,7 @@ const CharacterInput = ({
     <VStack
       maxW={400}
       width={"80%"}
-      backgroundColor="rgba(0, 0, 0, 0.6)"
+      backgroundColor="rgb(11, 9, 13, .7)"
       paddingX={"1rem"}
       paddingY={".7rem"}
       borderRadius={4}
@@ -219,13 +215,15 @@ const CharacterInput = ({
       >
         <Input
           rounded={".3rem"}
-          bg={"white"}
-          color={"black"}
+          bg={"#332F40"}
+          color={"#D9CEC5"}
           height={"3rem"}
           width={"100%"}
           value={input}
           fontSize={"1rem"}
-          focusBorderColor={"white"}
+          border={"1px solid #332F40"}
+          _hover={{}}
+          focusBorderColor={"#332F40"}
           onKeyUp={(e) => {
             if (e.keyCode === 38)
               setSelectedCharacter(
@@ -265,9 +263,10 @@ const CharacterInput = ({
           }`}
           fontSize={30}
           transition={".4s"}
-          color={filteredCharacters.length > 0 ? "white" : "gray"}
+          color={filteredCharacters.length > 0 ? "#D9CEC5" : "#A69EB8"}
           cursor={filteredCharacters.length > 0 ? "pointer" : ""}
           _hover={{
+            color: filteredCharacters.length > 0 ? "#F7F5F3" : "",
             transform:
               filteredCharacters.length > 0 ? "rotate(45deg) scale(1.2)" : "",
           }}
@@ -288,7 +287,7 @@ const CharacterInput = ({
           transition={".4s"}
           padding={".2rem"}
           opacity={isOpen ? 100 : 0}
-          backgroundColor={"rgba(0, 0, 0, .6)"}
+          backgroundColor="rgb(11, 9, 13, .7)"
           zIndex={99}
         >
           {charactersList()}

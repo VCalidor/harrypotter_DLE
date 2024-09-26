@@ -19,9 +19,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
       <Image
-        src={backgroundImage}
+        bg={"#141217"}
         position={"fixed"}
-        margin={0}
+        transform={"scale(1.1)"}
         width="100%"
         height="100%"
         objectFit="cover"
