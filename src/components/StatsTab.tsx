@@ -113,11 +113,11 @@ const StatsTab = ({ isDaily, hit }: { isDaily: boolean; hit: boolean }) => {
     >
       <Tooltip label={"Estatísticas"} hasArrow zIndex="tooltip">
         <Box
-          color={"grey"}
+          color={"gray"}
           transition="0.2s"
           fontSize={32}
           _hover={{
-            color: "white",
+            color: "#2C3DAA",
             cursor: "pointer",
             transform: "scale(1.2)",
           }}
@@ -126,7 +126,7 @@ const StatsTab = ({ isDaily, hit }: { isDaily: boolean; hit: boolean }) => {
         </Box>
       </Tooltip>
       <Box
-        color={fire.length > 0 ? "#871717" : "grey"}
+        color={fire.length > 0 ? "#2C3DAA" : "gray"}
         position={"relative"}
         transition="0.2s"
         fontWeight="bolder"
@@ -139,7 +139,7 @@ const StatsTab = ({ isDaily, hit }: { isDaily: boolean; hit: boolean }) => {
           position={"absolute"}
           fontSize={".9rem"}
           top={".8rem"}
-          right={".9rem"}
+          right={".83rem"}
           color={"#D9CEC5"}
         >
           {fire.length}

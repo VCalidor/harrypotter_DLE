@@ -1,4 +1,4 @@
-import { Button, Icon, keyframes, Text } from "@chakra-ui/react";
+import { Button, Icon, keyframes, Text, useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 const newTip = keyframes`
@@ -43,6 +43,8 @@ const TipCard = ({
   minTries: number;
   tipText: string;
 }) => {
+  const toast = useToast();
+
   const [tip, setTip] = useState<boolean>(false);
   const [showTip, setShowTip] = useState<boolean>(false);
   const [animate, setAnimate] = useState<string>(`${newTip} 1.5s ease-in-out`);
@@ -71,6 +73,7 @@ const TipCard = ({
       animation={tip ? animate : ""}
       justifyContent={"center"}
       gap={2}
+      _hover={{ transform: tip ? "scale(1.1)" : "" }}
       onClick={() => {
         if (tip && !flipping) {
           setAnimate(`${flipPart1} .75s ease-in-out`);
@@ -82,16 +85,21 @@ const TipCard = ({
               setFlipping(false);
             }, 750);
           }, 750);
+        } else {
+          toast({
+            title: `Dica liberada com ${minTries + 2} tentativas!`,
+            status: "info",
+            duration: 1000,
+            position: "top-right",
+            isClosable: true,
+          });
         }
       }}
     >
       {showTip ? (
         content.map((c) => {
           return (
-            <Text
-              fontSize={".8rem"}
-              textShadow=".5px .5px 0 #332F40"
-            >
+            <Text fontSize={".8rem"} textShadow=".5px .5px 0 #332F40">
               {c}
             </Text>
           );

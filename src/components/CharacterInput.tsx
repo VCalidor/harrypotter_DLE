@@ -181,7 +181,9 @@ const CharacterInput = ({
                 {character.name}
               </Text>
               {character.alternate_names.length > 0 && (
-                <Text fontSize={".6rem"}fontWeight={"bold"}>{character.alternate_names[0]}</Text>
+                <Text fontSize={".6rem"} fontWeight={"bold"}>
+                  {character.alternate_names[0]}
+                </Text>
               )}
             </Flex>
           </HStack>
@@ -214,6 +216,8 @@ const CharacterInput = ({
         position={"relative"}
       >
         <Input
+          placeholder="Digite o nome do personagem"
+          _placeholder={{ color: "#A69EB8", fontSize: ".85rem" }}
           rounded={".3rem"}
           bg={"#332F40"}
           color={"#D9CEC5"}

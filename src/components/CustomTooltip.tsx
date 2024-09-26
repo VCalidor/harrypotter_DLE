@@ -29,10 +29,10 @@ const CustomTooltip = ({
         <Box
           onClick={onOpen}
           transition="0.2s"
-          color={"grey"}
+          color={"gray"}
           fontSize={32}
           _hover={{
-            color: "white",
+            color: "#2C3DAA",
             cursor: "pointer",
             transform: "scale(1.2)",
           }}

@@ -87,15 +87,14 @@ const AtributeCard = ({
       border={"solid 2px rgb(11, 9, 13, .7)"}
     >
       {atributes.map((atribute, index) => (
-        <HStack gap={1}>
+        <HStack gap={1} key={`${character.name}_atribute_${index}`}>
           <Text
-            key={`atribute_${index}`}
             fontSize={
-              atributes.length < 4
+              atributes.length < 3
                 ? ".85rem"
-                : atributes.length === 4
+                : atributes.length < 4
                 ? ".6rem"
-                : ".5.5rem"
+                : ".55rem"
             }
           >
             {atribute}{" "}
