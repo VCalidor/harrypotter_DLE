@@ -1,4 +1,11 @@
-import { Button, Icon, keyframes, Text, useToast } from "@chakra-ui/react";
+import {
+  Button,
+  Icon,
+  keyframes,
+  Text,
+  useToast,
+  VStack,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 const newTip = keyframes`
@@ -97,13 +104,15 @@ const TipCard = ({
       }}
     >
       {showTip ? (
-        content.map((c) => {
-          return (
-            <Text fontSize={".8rem"} textShadow=".5px .5px 0 #332F40">
-              {c}
-            </Text>
-          );
-        })
+        <VStack>
+          {content.map((c) => {
+            return (
+              <Text fontSize={".8rem"} textShadow=".5px .5px 0 #332F40">
+                {c}
+              </Text>
+            );
+          })}
+        </VStack>
       ) : (
         <>
           <Icon as={icon} boxSize={"2rem"} color={"#0B090D"} />

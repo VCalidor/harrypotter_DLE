@@ -1,16 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import { MyProvider, useMyContext } from "./context/index.tsx";
-import { ChakraProvider, Image } from "@chakra-ui/react";
-// import backgroundImage from "./assets/background.jpg";
-import "./assets/fonts.css";
+import { ChakraProvider } from "@chakra-ui/react";
 import theme from "./theme";
+import backgroundPattern from "./assets/backgroundPattern.png";
+
+document.body.style.backgroundImage = `url(${backgroundPattern})`;
 
 const Loading = () => <div>Carregando...</div>;
 
 const Root = () => {
   const { loading } = useMyContext();
+
+  const handleMouseMove = (e: MouseEvent) => {
+    const { clientX, clientY } = e;
+
+    const xPos = (clientX / window.innerWidth) * 2;
+    const yPos = (clientY / window.innerHeight) * 2;
+
+    document.body.style.transition = "background-position 0.6s ease";
+    document.body.style.backgroundPosition = `${xPos}% ${yPos}%`;
+  };
+
+  useEffect(() => {
+    window.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
 
   return loading ? <Loading /> : <App />;
 };
@@ -18,15 +37,6 @@ const Root = () => {
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
-      <Image
-        bg={"#141217"}
-        position={"fixed"}
-        transform={"scale(1.1)"}
-        width="100%"
-        height="100%"
-        objectFit="cover"
-        zIndex={-1}
-      />
       <MyProvider>
         <Root />
       </MyProvider>

@@ -79,6 +79,7 @@ const HitCharacter = ({
       textAlign={"center"}
       position={"relative"}
       backgroundColor="rgb(11, 9, 13, .7)"
+      border={"1px solid rgb(51, 47, 64, .7)"}
       rounded={"md"}
       w={width}
       padding={"2rem"}

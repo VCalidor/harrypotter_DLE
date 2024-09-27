@@ -170,7 +170,7 @@ const CharacterInput = ({
               selectCharacter(character);
             }}
           >
-            <Image src={character.image} boxSize={"2.6rem"} />
+            <Image src={character.image} boxSize={"2.6rem"} rounded={"100%"} />
             <Flex flexDirection={"column"} alignItems={"start"}>
               <Text
                 fontSize={"1.2rem"}
@@ -204,6 +204,7 @@ const CharacterInput = ({
       maxW={400}
       width={"80%"}
       backgroundColor="rgb(11, 9, 13, .7)"
+      border={"1px solid rgb(51, 47, 64, .7)"}
       paddingX={"1rem"}
       paddingY={".7rem"}
       borderRadius={4}

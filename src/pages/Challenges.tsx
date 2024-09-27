@@ -177,6 +177,7 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
               paddingY={".6rem"}
               paddingRight={"2.1rem"}
               backgroundColor="rgb(11, 9, 13, .7)"
+              border={"1px solid rgb(51, 47, 64, .7)"}
               rounded={6}
             >
               <Text fontSize={".9rem"} m={0}>

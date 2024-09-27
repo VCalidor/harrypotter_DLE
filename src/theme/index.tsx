@@ -15,6 +15,9 @@ const theme = extendTheme({
         height: "100%",
         margin: 0,
         padding: 0,
+        backgroundRepeat: "repeat",
+        backgroundSize: "auto",
+        backgroundPosition: "top left",
       },
       "::-webkit-scrollbar": {
         width: "10px",

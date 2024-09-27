@@ -106,6 +106,7 @@ const StatsTab = ({ isDaily, hit }: { isDaily: boolean; hit: boolean }) => {
     <HStack
       gap={"1rem"}
       backgroundColor="rgb(11, 9, 13, .7)"
+      border={"1px solid rgb(51, 47, 64, .7)"}
       padding={".5rem"}
       paddingX={"1rem"}
       paddingBottom={0}

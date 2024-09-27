@@ -21,6 +21,7 @@ const Tips = ({
       maxW={500}
       width={"80%"}
       backgroundColor="rgb(11, 9, 13, .7)"
+      border={"1px solid rgb(51, 47, 64, .7)"}
       borderRadius={6}
       alignItems={"center"}
       flexDirection={"column"}

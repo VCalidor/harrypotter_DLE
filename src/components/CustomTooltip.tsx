@@ -58,6 +58,7 @@ const CustomTooltip = ({
           <ModalBody padding={0} w={"100%"}>
             <VStack
               backgroundColor="rgb(11, 9, 13, .7)"
+              border={"1px solid rgb(51, 47, 64, .7)"}
               borderRadius={6}
               padding={"2rem"}
               gap={4}
