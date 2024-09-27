@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import { MyProvider, useMyContext } from "./context/index.tsx";
 import { ChakraProvider } from "@chakra-ui/react";
+import "./assets/fonts.css";
 import theme from "./theme";
 import backgroundPattern from "./assets/backgroundPattern.png";
 
