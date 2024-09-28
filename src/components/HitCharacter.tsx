@@ -84,7 +84,7 @@ const HitCharacter = ({
       rounded={"md"}
       w={width}
       maxW={"90%"}
-      padding={"2rem"}
+      padding={" clamp(0.6rem, 2.5vw, 2rem)"}
     >
       <IconButton
         position={"absolute"}

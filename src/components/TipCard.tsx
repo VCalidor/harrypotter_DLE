@@ -117,10 +117,11 @@ const TipCard = ({
             position={"absolute"}
             bottom={".3rem"}
             fontWeight={"bold"}
-            fontSize={".8rem"}
             color={"#867F83"}
             textShadow="1px 1px 0 #332F40"
-            flexWrap={"wrap"}
+            textAlign="center"
+            whiteSpace="normal"
+            fontSize="clamp(0.6rem, 2.5vw, 0.8rem)"
           >
             {tipText}
           </Text>

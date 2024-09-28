@@ -30,7 +30,6 @@ const Home = () => {
             variant="buttonVariant"
             onClick={() => navigate("/daily-challenge")}
             position={"relative"}
-            flexWrap={"wrap"}
           >
             <Icon as={FaCalendarDays} boxSize={"1.8rem"} color={"#0B090D"} />
             <Icon
@@ -45,17 +44,17 @@ const Home = () => {
               position={"absolute"}
               bottom={".3rem"}
               fontWeight={"bold"}
-              fontSize={".8rem"}
               color={"#867F83"}
               textShadow="1px 1px 0 #332F40"
-            >
+              textAlign="center"
+              whiteSpace="normal"
+              fontSize="clamp(0.6rem, 2.5vw, 0.8rem)"             >
               Desafio diário
             </Text>
           </Button>
           <Button
             variant="buttonVariant"
             onClick={() => navigate("/infinite-challenge")}
-            flexWrap={"wrap"}
           >
             <Icon as={IoInfiniteSharp} boxSize={"2.8rem"} color={"#0B090D"} />
             <Icon
@@ -70,9 +69,11 @@ const Home = () => {
               position={"absolute"}
               bottom={".3rem"}
               fontWeight={"bold"}
-              fontSize={".8rem"}
               color={"#867F83"}
               textShadow="1px 1px 0 #332F40"
+              textAlign="center"
+              whiteSpace="normal"
+              fontSize="clamp(0.6rem, 2.5vw, 0.8rem)" 
             >
               Desafio infinito
             </Text>
