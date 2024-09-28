@@ -6,7 +6,7 @@ import {
   useToast,
   VStack,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const newTip = keyframes`
   0% {
@@ -37,7 +37,6 @@ const flipPart2 = keyframes`
 
 const TipCard = ({
   selectedCharacters,
-  hit,
   icon,
   content,
   minTries,
@@ -121,6 +120,7 @@ const TipCard = ({
             fontSize={".8rem"}
             color={"#867F83"}
             textShadow="1px 1px 0 #332F40"
+            flexWrap={"wrap"}
           >
             {tipText}
           </Text>

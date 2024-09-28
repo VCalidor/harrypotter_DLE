@@ -30,6 +30,7 @@ const Home = () => {
             variant="buttonVariant"
             onClick={() => navigate("/daily-challenge")}
             position={"relative"}
+            flexWrap={"wrap"}
           >
             <Icon as={FaCalendarDays} boxSize={"1.8rem"} color={"#0B090D"} />
             <Icon
@@ -54,6 +55,7 @@ const Home = () => {
           <Button
             variant="buttonVariant"
             onClick={() => navigate("/infinite-challenge")}
+            flexWrap={"wrap"}
           >
             <Icon as={IoInfiniteSharp} boxSize={"2.8rem"} color={"#0B090D"} />
             <Icon

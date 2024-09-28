@@ -111,7 +111,6 @@ const HitCharacter = ({
         letterSpacing=".03em"
         textShadow="4px 4px 2px rgba(0, 0, 0, 1)"
         color={"#C1C1C1"}
-
       >
         Parabéns
       </Heading>
@@ -161,7 +160,7 @@ const HitCharacter = ({
             restartChallenge();
           }}
         >
-          <Text fontSize={16} fontWeight={"bold"}>
+          <Text fontSize={16} fontWeight={"bold"} flexWrap={"wrap"}>
             Jogar Novamente
           </Text>
         </Button>
