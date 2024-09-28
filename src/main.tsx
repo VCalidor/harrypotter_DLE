@@ -17,8 +17,8 @@ const Root = () => {
   const handleMouseMove = (e: MouseEvent) => {
     const { clientX, clientY } = e;
 
-    const xPos = (clientX / window.innerWidth) * 2;
-    const yPos = (clientY / window.innerHeight) * 2;
+    const xPos = (clientX / window.innerWidth) * 5;
+    const yPos = (clientY / window.innerHeight) * 5;
 
     document.body.style.transition = "background-position 0.6s ease";
     document.body.style.backgroundPosition = `${xPos}% ${yPos}%`;

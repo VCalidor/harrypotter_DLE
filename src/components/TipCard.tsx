@@ -41,6 +41,7 @@ const TipCard = ({
   content,
   minTries,
   tipText,
+  hit,
 }: {
   selectedCharacters: any[];
   icon: any;
@@ -60,14 +61,14 @@ const TipCard = ({
       position={"relative"}
       key={`${showTip}${content[0]}Tip`}
       variant="buttonVariant"
-      animation={selectedCharacters.length > minTries ? animate : ""}
+      animation={selectedCharacters.length > minTries || hit ? animate : ""}
       justifyContent={"center"}
       gap={2}
       _hover={{
-        transform: selectedCharacters.length > minTries ? "scale(1.1)" : "",
+        transform: selectedCharacters.length > minTries || hit ? "scale(1.1)" : "",
       }}
       onClick={() => {
-        if (selectedCharacters.length > minTries) {
+        if (selectedCharacters.length > minTries || hit) {
           if (!flipping) {
             setAnimate(`${flipPart1} .75s ease-in-out`);
             setFlipping(true);
@@ -94,9 +95,13 @@ const TipCard = ({
     >
       {showTip ? (
         <VStack>
-          {content.map((c) => {
+          {content.map((c, index) => {
             return (
-              <Text fontSize={".8rem"} textShadow=".5px .5px 0 #332F40">
+              <Text
+                fontSize={".8rem"}
+                textShadow=".5px .5px 0 #332F40"
+                key={`${c}_${index}`}
+              >
                 {c}
               </Text>
             );

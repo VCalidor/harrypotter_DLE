@@ -133,7 +133,7 @@ const HitCharacter = ({
             fontFamily={"Harry P"}
             letterSpacing=".03em"
             textShadow="2px 2px 2px rgba(0, 0, 0, 1)"
-            color={"#C1C1C1"}
+            color={"#AF811E"}
           >
             {chosenCharacter.name}
           </Text>
@@ -149,7 +149,7 @@ const HitCharacter = ({
       {isDaily ? (
         <Box>
           <Text fontSize={"1rem"}>Próximo personagem em aproximadamente:</Text>
-          <Text fontSize={24} fontWeight={"bold"}>
+          <Text fontSize={24} fontWeight={"bold"} fontFamily={"Harry P"}>
             {formatTime(time)}
           </Text>
         </Box>
