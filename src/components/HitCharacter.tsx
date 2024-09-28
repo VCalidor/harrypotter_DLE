@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Flex,
+  Heading,
   HStack,
   IconButton,
   Image,
@@ -82,6 +83,7 @@ const HitCharacter = ({
       border={"1px solid rgb(51, 47, 64, .7)"}
       rounded={"md"}
       w={width}
+      maxW={"90%"}
       padding={"2rem"}
     >
       <IconButton
@@ -103,9 +105,16 @@ const HitCharacter = ({
           cursor: "pointer",
         }}
       />
-      <Text as={"h2"} fontSize={"2rem"}>
+      <Heading
+        as="h2"
+        fontSize={"xxx-large"}
+        letterSpacing=".03em"
+        textShadow="4px 4px 2px rgba(0, 0, 0, 1)"
+        color={"#C1C1C1"}
+
+      >
         Parabéns
-      </Text>
+      </Heading>
       <HStack justifyContent={"space-around"} width={"80%"}>
         <Flex borderRadius={4} width={"10rem"} height={"12rem"}>
           <Image
@@ -120,7 +129,15 @@ const HitCharacter = ({
           <Text color={"#A69EB8"} fontSize={".8rem"} m={0}>
             Você acertou
           </Text>
-          <Text fontSize={"1.6rem"}>{chosenCharacter.name}</Text>
+          <Text
+            fontSize={"2rem"}
+            fontFamily={"Harry P"}
+            letterSpacing=".03em"
+            textShadow="2px 2px 2px rgba(0, 0, 0, 1)"
+            color={"#C1C1C1"}
+          >
+            {chosenCharacter.name}
+          </Text>
         </VStack>
       </HStack>
       <Box>

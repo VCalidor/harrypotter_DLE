@@ -25,7 +25,7 @@ const Tips = ({
       borderRadius={6}
       alignItems={"center"}
       flexDirection={"column"}
-      padding={"1.5rem"}
+      paddingX={".8rem"}
       paddingY={"2rem"}
       gap={"1.5rem"}
     >
@@ -36,7 +36,7 @@ const Tips = ({
         Adivinhe qual é o personagem{isDaily ? " DE HOJE" : ""}!
       </Text>
       <HStack
-        gap={16}
+        gap={".5rem"}
         w={"100%"}
         flexWrap={"wrap"}
         justifyContent={"space-around"}

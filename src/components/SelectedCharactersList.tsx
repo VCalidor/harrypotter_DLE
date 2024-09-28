@@ -35,8 +35,18 @@ const SelectedCharactersList = ({
   animate: boolean;
 }) => {
   return (
-    <VStack gap={"1rem"}>
-      <HStack gap={"1rem"} fontSize={".85rem"} color={"#D9CEC5"}>
+    <VStack
+      gap={"1rem"}
+      maxW={"90%"}
+      overflowX={"auto"}
+      paddingBottom={".4rem"}
+      alignItems="flex-start"
+    >
+      <HStack
+        gap={"1rem"}
+        fontSize={".85rem"}
+        color={"#D9CEC5"}
+      >
         {atributes.map((atribute, index) => {
           return (
             <Flex
@@ -54,7 +64,7 @@ const SelectedCharactersList = ({
         {lastAddedCharacter && (
           <SelectedCharactersComponent
             key={lastAddedCharacter.name}
-            character={lastAddedCharacter}
+            character={lastAddedCharacter}  
             index={-1}
             chosenCharacter={chosenCharacter}
             isNew={true}

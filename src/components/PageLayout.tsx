@@ -12,12 +12,7 @@ const PageLayout = ({
   const navigate = useNavigate();
 
   return (
-    <VStack
-      w={"100%"}
-      paddingTop={50}
-      textAlign={"center"}
-      gap={6}
-    >
+    <VStack w={"100%"} paddingTop={50} textAlign={"center"} gap={6}>
       <HStack
         w={"80%"}
         justifyContent={"center"}
@@ -31,6 +26,7 @@ const PageLayout = ({
           textShadow="4px 4px 2px rgba(0, 0, 0, 1)"
           textAlign="center"
           flexGrow={1}
+          color={"#C1C1C1"}
         >
           Mundo Bruxo
         </Heading>

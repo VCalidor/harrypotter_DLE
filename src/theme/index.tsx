@@ -42,11 +42,11 @@ const theme = extendTheme({
         buttonVariant: {
           border: "solid 4px #F7F5F3",
           borderBottom: "solid 4px #332F40",
+          flexGrow: 0.8,
+          maxWidth: "12rem",
           borderRight: "solid 4px #332F40",
           borderRadius: 4,
           paddingY: "2.4rem",
-          w: "40%",
-          minWidth: "8rem",
           color: "black",
           background: "#D9CEC5",
           cursor: "pointer",

@@ -28,7 +28,7 @@ const CharacterImageCard = ({
       position={"relative"}
       borderRadius={4}
       width={"6.2rem"}
-      height={"5.6rem"}
+      height={"5.5rem"}
       transition="transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.7s ease"
       opacity={opacity}
       transform={transform}
@@ -38,7 +38,7 @@ const CharacterImageCard = ({
       <Image
         borderRadius={4}
         width={"6.2rem"}
-        height={"5.6rem"}
+        height={"5.5rem"}
         src={imgSrc}
         alt={name}
       />
@@ -46,7 +46,7 @@ const CharacterImageCard = ({
         position={"absolute"}
         zIndex={10}
         width={"6.2rem"}
-        height={"5.6rem"}
+        height={"5.5rem"}
         transition={".2s"}
         opacity={isHovering ? 1 : 0}
       >
