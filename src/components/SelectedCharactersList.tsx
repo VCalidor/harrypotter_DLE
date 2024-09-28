@@ -51,7 +51,7 @@ const SelectedCharactersList = ({
 
       setVStackHeight(height);
     }
-  }, [selectedCharacters]);
+  }, [lastAddedCharacter]);
 
   return (
     <VStack
