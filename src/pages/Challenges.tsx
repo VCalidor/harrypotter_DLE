@@ -158,10 +158,7 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
               postHit={postHit}
             />
           )}
-          <Text
-            fontSize={".8rem"}
-            textShadow=".5px .5px 0 rgba(0, 0, 0, .4)"
-          >
+          <Text fontSize={".8rem"} textShadow=".5px .5px 0 rgba(0, 0, 0, .4)">
             {hits} pessoas já descobriram!
           </Text>
           <SelectedCharactersList
@@ -186,8 +183,10 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
               <Text
                 as="span"
                 color={"#AF811E"}
-                fontWeight={"bold"}
-                fontSize={"1.4rem"}
+                fontWeight={"light"}
+                fontSize={"1.8rem"}
+                fontFamily={"Harry P"}
+                letterSpacing=".03em"
                 m={0}
               >
                 {yesterdayCharacter.name}
