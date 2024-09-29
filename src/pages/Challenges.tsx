@@ -149,7 +149,7 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
   return (
     <PageLayout isHome={true}>
       <StatsTab isDaily={isDaily} hit={hit || alreadyHit} />
-      {!isDaily || true ? (
+      {!isDaily || isTodayCharacter ? (
         <>
           <Tips
             selectedCharacters={selectedCharacters}
