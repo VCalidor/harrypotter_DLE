@@ -5,8 +5,8 @@ import { useEffect, useRef, useState } from "react";
 
 const atributes = [
   "Personagem",
-  "Especie",
-  "Genero",
+  "Espécie",
+  "Gênero",
   "Casa",
   "Ano de Nascimento",
   "Ancestralidade",
