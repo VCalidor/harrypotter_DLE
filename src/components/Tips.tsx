@@ -33,7 +33,7 @@ const Tips = ({
         fontSize={"1.2rem"}
         textShadow="2px 2px 0 rgba(0, 0, 0, .7)"
       >
-        Adivinhe qual é o personagem{isDaily ? " DE HOJE" : ""}!
+        Adivinhe qual é o personagem{isDaily ? " de hoje" : ""}!
       </Text>
       <HStack
         gap={".5rem"}

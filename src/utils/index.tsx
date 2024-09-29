@@ -2,13 +2,10 @@ import CryptoJS from "crypto-js";
 const SECRET_KEY = import.meta.env.VITE_SECRET_KEY;
 
 export const formatDate = (date: Date) => {
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
-
-  return `${day < 10 ? `0${day}` : day}/${
-    month < 10 ? `0${month}` : month
-  }/${year}`;
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = String(date.getFullYear()).slice(-2);
+  return `${day}/${month}/${year}`;
 };
 
 export const encryptData = (data: any) => {

@@ -100,7 +100,7 @@ const CharacterInput = ({
           );
 
           const today = new Date();
-          today.setHours(today.getHours() - 5);
+          today.setHours(today.getHours() - 2);
 
           dailyTries.unshift({
             character,
@@ -124,7 +124,7 @@ const CharacterInput = ({
             );
 
             const today = new Date();
-            today.setHours(today.getHours() - 5);
+            today.setHours(today.getHours() - 2);
             const position = await postHit();
 
             fire.unshift({

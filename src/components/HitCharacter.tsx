@@ -7,6 +7,7 @@ import {
   IconButton,
   Image,
   Text,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
@@ -18,8 +19,8 @@ import { RiFullscreenFill } from "react-icons/ri";
 const calculateTime = () => {
   const time = new Date();
   time.setHours(1 - time.getHours());
-  time.setMinutes(60 - time.getMinutes());
-  time.setSeconds(60 - time.getSeconds());
+  time.setMinutes(60 - time.getMinutes() - 1);
+  time.setSeconds(60 - time.getSeconds() - 1);
   return time;
 };
 
@@ -52,19 +53,32 @@ const HitCharacter = ({
   onOpen: any;
   width?: string;
 }) => {
+  const toast = useToast();
+
   const [time, setTime] = useState(calculateTime());
 
   useEffect(() => {
+    if (!isDaily) return;
+
     const intervalId = setInterval(() => {
       setTime((prevTime) => {
         const newTime = new Date(prevTime);
         newTime.setSeconds(newTime.getSeconds() - 1);
 
         if (newTime.getTime() <= 0) {
-          window.location.reload();
+          toast({
+            title: `Reiniciando a página em 10 segundos`,
+            status: "info",
+            duration: 10000,
+            position: "top-right",
+            isClosable: true,
+          });
+
+          setTimeout(() => {
+            window.location.reload();
+          }, 10000);
           return prevTime;
         }
-
         return newTime;
       });
     }, 1000);

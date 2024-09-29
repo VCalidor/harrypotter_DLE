@@ -10,6 +10,8 @@ import { Character, YesterdayCharacter } from "../interfaces";
 import { useMyContext } from "../context";
 import PageLayout from "../components/PageLayout";
 import HitCharacterFullComponent from "../components/HitCharacterFullComponent";
+import UpdatingCharacter from "../components/UpdatingCharacter";
+import { formatDate } from "../utils";
 
 const getRandomCharacter = (characters: Character[]) => {
   return characters[Math.floor(Math.random() * characters.length)];
@@ -25,7 +27,9 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
   const [animate, setAnimate] = useState(false);
   const [hit, setHit] = useState(false);
   const [alreadyHit, setAlreadyHit] = useState(false);
-  const [chosenCharacter, setChosenCharacter] = useState<Character>({
+  const [chosenCharacter, setChosenCharacter] = useState<
+    Character & { date?: string }
+  >({
     name: "",
     alternate_names: [],
     species: [],
@@ -40,10 +44,12 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
     alive: false,
     first_appearance: ["", 0],
     image: "",
+    date: "",
   });
   const [yesterdayCharacter, setYesterdayCharacter] =
     useState<YesterdayCharacter>({ name: "", number: 0 });
   const [hits, setHits] = useState(0);
+  const [isTodayCharacter, setIsTodayCharacter] = useState<boolean>(false);
 
   useEffect(() => {
     isDaily
@@ -71,13 +77,19 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const data: { tdCharacter: Character; ydCharacter: YesterdayCharacter } =
-        await response.json();
+      const data: {
+        tdCharacter: Character & { date: string };
+        ydCharacter: YesterdayCharacter;
+      } = await response.json();
+
+      const today = new Date();
+      today.setHours(today.getHours() - 2);
 
       dailyTries[0]?.character.name === data.tdCharacter.name &&
         setAlreadyHit(true);
       setChosenCharacter(data.tdCharacter);
       setYesterdayCharacter(data.ydCharacter);
+      setIsTodayCharacter(data.tdCharacter.date === formatDate(today));
     } catch (error) {
       console.error("Erro ao buscar o personagem:", error);
     }
@@ -137,7 +149,7 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
   return (
     <PageLayout isHome={true}>
       <StatsTab isDaily={isDaily} hit={hit || alreadyHit} />
-      {(!isDaily || chosenCharacter.name) && (
+      {!isDaily || true ? (
         <>
           <Tips
             selectedCharacters={selectedCharacters}
@@ -213,6 +225,8 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
             selectedCharacters={selectedCharacters}
           />
         </>
+      ) : (
+        <UpdatingCharacter />
       )}
     </PageLayout>
   );
