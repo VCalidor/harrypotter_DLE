@@ -266,12 +266,12 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
             gap={0}
           >
             <Text fontSize={"2rem"}>
-              {!isTodayCharacter
+              {isTodayCharacter
                 ? "Carregando o personagem..."
                 : "O personagem será atualizado em breve."}
             </Text>
             <Text fontSize={"1rem"}>
-              {!isTodayCharacter
+              {isTodayCharacter
                 ? "Caso demore muito recarregue a página."
                 : "Aguarde um momento e recarregue a página."}
             </Text>
