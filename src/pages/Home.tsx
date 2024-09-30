@@ -48,7 +48,8 @@ const Home = () => {
               textShadow="1px 1px 0 #332F40"
               textAlign="center"
               whiteSpace="normal"
-              fontSize="clamp(0.6rem, 2.5vw, 0.8rem)"             >
+              fontSize="clamp(0.6rem, 2.5vw, 0.8rem)"
+            >
               Desafio diário
             </Text>
           </Button>
@@ -73,7 +74,7 @@ const Home = () => {
               textShadow="1px 1px 0 #332F40"
               textAlign="center"
               whiteSpace="normal"
-              fontSize="clamp(0.6rem, 2.5vw, 0.8rem)" 
+              fontSize="clamp(0.6rem, 2.5vw, 0.8rem)"
             >
               Desafio infinito
             </Text>

@@ -1,7 +1,8 @@
-import { Flex, HStack, keyframes, Text, VStack } from "@chakra-ui/react";
+import { Flex, HStack, Text, VStack } from "@chakra-ui/react";
 import SelectedCharactersComponent from "./SelectedCharactersComponent";
 import { Character } from "../interfaces";
 import { useEffect, useRef, useState } from "react";
+import { appear, goDown, scaleHeight } from "../animations";
 
 const atributes = [
   "Personagem",
@@ -14,23 +15,6 @@ const atributes = [
   "Afiliações",
   "Primeira Aparição",
 ];
-
-const goDown = keyframes`
-  0% {
-    transform: translateY(0px);
-  }
-  100% {
-    transform: translateY(98px);
-  }`;
-
-const scaleHeight = (height: number) => keyframes`
-  0% {
-    height: ${height}px;
-  }
-  100% {
-    height: ${height + 98}px;
-  }`;
-
 const SelectedCharactersList = ({
   lastAddedCharacter,
   selectedCharacters,
@@ -44,6 +28,7 @@ const SelectedCharactersList = ({
 }) => {
   const vStackRef = useRef<HTMLDivElement>(null);
   const [vStackHeight, setVStackHeight] = useState<number>(0);
+  const hasAppearedRef = useRef(false);
 
   useEffect(() => {
     if (vStackRef.current) {
@@ -52,6 +37,10 @@ const SelectedCharactersList = ({
       setVStackHeight(height);
     }
   }, [lastAddedCharacter]);
+
+  useEffect(() => {
+    hasAppearedRef.current = true;
+  }, []);
 
   return (
     <VStack
@@ -66,7 +55,13 @@ const SelectedCharactersList = ({
       paddingBottom={".4rem"}
       paddingX={".5rem"}
       alignItems="flex-start"
-      animation={animate ? `${scaleHeight(vStackHeight)} .4s ease-in-out` : ""}
+      animation={
+        hasAppearedRef
+          ? animate
+            ? `${scaleHeight(vStackHeight)} .4s ease-in-out`
+            : ""
+          : `${appear} .2s ease-in-out`
+      }
     >
       <HStack gap={"1rem"} fontSize={".85rem"} color={"#D9CEC5"}>
         {atributes.map((atribute, index) => {

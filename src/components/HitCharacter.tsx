@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { Character } from "../interfaces";
 import { IoMdClose } from "react-icons/io";
 import { RiFullscreenFill } from "react-icons/ri";
+import { appear } from "../animations";
 
 const calculateTime = () => {
   const time = new Date();
@@ -99,6 +100,7 @@ const HitCharacter = ({
       w={width}
       maxW={"90%"}
       padding={" clamp(0.6rem, 2.5vw, 2rem)"}
+      animation={`${appear} .2s ease-in-out`}
     >
       <IconButton
         position={"absolute"}

@@ -14,6 +14,7 @@ import { useMyContext } from "../context";
 
 import { Character } from "../interfaces";
 import { encryptData } from "../utils";
+import { appear } from "../animations";
 
 const CharacterInput = ({
   selectedCharacters,
@@ -209,6 +210,7 @@ const CharacterInput = ({
       paddingY={".7rem"}
       borderRadius={4}
       transition={".4s"}
+      animation={`${appear} .2s ease-in-out`}
     >
       <HStack
         maxW={400}

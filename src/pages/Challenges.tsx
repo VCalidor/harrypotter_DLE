@@ -1,4 +1,4 @@
-import { HStack, Text } from "@chakra-ui/react";
+import { Button, HStack, Icon, Text, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -10,16 +10,16 @@ import { Character, YesterdayCharacter } from "../interfaces";
 import { useMyContext } from "../context";
 import PageLayout from "../components/PageLayout";
 import HitCharacterFullComponent from "../components/HitCharacterFullComponent";
-import UpdatingCharacter from "../components/UpdatingCharacter";
+import Loading from "../components/Loading";
 import { formatDate } from "../utils";
+import { GrPowerReset } from "react-icons/gr";
+import { appear } from "../animations";
 
 const getRandomCharacter = (characters: Character[]) => {
   return characters[Math.floor(Math.random() * characters.length)];
 };
 
 const Challenges = ({ isDaily }: { isDaily: boolean }) => {
-  console.log();
-
   const { allCharacters } = useMyContext();
   const [selectedCharacters, setSelectedCharacters] = useState<Character[]>([]);
   const [lastAddedCharacter, setLastAddedCharacter] =
@@ -170,7 +170,11 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
               postHit={postHit}
             />
           )}
-          <Text fontSize={".8rem"} textShadow=".5px .5px 0 rgba(0, 0, 0, .4)">
+          <Text
+            fontSize={".8rem"}
+            textShadow=".5px .5px 0 rgba(0, 0, 0, .4)"
+            animation={`${appear} .2s ease-in-out`}
+          >
             {hits} pessoas já descobriram!
           </Text>
           <SelectedCharactersList
@@ -188,6 +192,7 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
               backgroundColor="rgb(11, 9, 13, .7)"
               border={"1px solid rgb(51, 47, 64, .7)"}
               rounded={6}
+              animation={`${appear} .2s ease-in-out`}
             >
               <Text fontSize={".9rem"} m={0}>
                 Personagem de ontem:
@@ -226,7 +231,52 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
           />
         </>
       ) : (
-        <UpdatingCharacter />
+        <Loading
+          button={
+            <Button variant={"buttonVariant"} minW={"10rem"}>
+              <Icon as={GrPowerReset} boxSize={"1.8rem"} color={"#0B090D"} />
+              <Icon
+                boxSize={"2rem"}
+                as={GrPowerReset}
+                color={"#0B090D"}
+                position={"absolute"}
+                opacity={0.5}
+                filter="blur(2px)"
+                onClick={() => window.location.reload()}
+              />
+              <Text
+                position={"absolute"}
+                bottom={".3rem"}
+                fontWeight={"bold"}
+                color={"#867F83"}
+                textShadow="1px 1px 0 #332F40"
+                textAlign="center"
+                whiteSpace="normal"
+                fontSize="clamp(0.6rem, 2.5vw, 0.8rem)"
+              >
+                Recarregar página
+              </Text>
+            </Button>
+          }
+        >
+          <VStack
+            fontWeight={"light"}
+            letterSpacing={".1px"}
+            fontFamily={"Harry P"}
+            gap={0}
+          >
+            <Text fontSize={"2rem"}>
+              {!isTodayCharacter
+                ? "Carregando o personagem..."
+                : "O personagem será atualizado em breve."}
+            </Text>
+            <Text fontSize={"1rem"}>
+              {!isTodayCharacter
+                ? "Caso demore muito recarregue a página."
+                : "Aguarde um momento e recarregue a página."}
+            </Text>
+          </VStack>
+        </Loading>
       )}
     </PageLayout>
   );

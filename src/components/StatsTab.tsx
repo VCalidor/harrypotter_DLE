@@ -1,36 +1,11 @@
-import { Box, HStack, Icon, keyframes, Text, Tooltip } from "@chakra-ui/react";
+import { Box, HStack, Icon, Text, Tooltip } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { AiFillFire } from "react-icons/ai";
 import { BsFillBarChartFill } from "react-icons/bs";
 import { decryptData } from "../utils";
 import CustomTooltip from "./CustomTooltip";
 import HowToPlayTooltip from "./HowToPlayTooltip";
-
-const flaming = keyframes`
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  20% {
-    transform: scale(1.3);
-    opacity: 0.8;
-  }
-  40% {
-    transform: scale(0.9);
-    opacity: 0.6;
-  }
-  60% {
-    transform: scale(1.2);
-    opacity: 0.9;
-  }
-  80% {
-    transform: scale(0.95);
-    opacity: 0.7;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }`;
+import { flaming } from "../animations";
 
 interface FireData {
   character: {

@@ -4,6 +4,7 @@ import { FaWandSparkles } from "react-icons/fa6";
 
 import { Character } from "../interfaces";
 import TipCard from "./TipCard";
+import { appear } from "../animations";
 
 const Tips = ({
   selectedCharacters,
@@ -28,11 +29,9 @@ const Tips = ({
       paddingX={".8rem"}
       paddingY={"2rem"}
       gap={"1.5rem"}
+      animation={`${appear} .2s ease-in-out`}
     >
-      <Text
-        fontSize={"1.2rem"}
-        textShadow="2px 2px 0 rgba(0, 0, 0, .7)"
-      >
+      <Text fontSize={"1.2rem"} textShadow="2px 2px 0 rgba(0, 0, 0, .7)">
         Adivinhe qual é o personagem{isDaily ? " de hoje" : ""}!
       </Text>
       <HStack

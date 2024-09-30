@@ -1,6 +1,7 @@
 import { Button, Heading, HStack, Icon, VStack } from "@chakra-ui/react";
 import { GiReturnArrow } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
+import { fadeInAndScale, appear } from "../animations";
 
 const PageLayout = ({
   children,
@@ -12,7 +13,13 @@ const PageLayout = ({
   const navigate = useNavigate();
 
   return (
-    <VStack w={"100%"} paddingTop={50} textAlign={"center"} gap={6}>
+    <VStack
+      w={"100%"}
+      paddingTop={50}
+      textAlign={"center"}
+      gap={6}
+      animation={`${appear} .2s ease-in-out`}
+    >
       <HStack
         w={"80%"}
         justifyContent={"center"}
@@ -45,6 +52,7 @@ const PageLayout = ({
             borderRadius={"100%"}
             cursor={"pointer"}
             transition={"0.2s"}
+            animation={`${fadeInAndScale} 0.6s ease-out`}
             _hover={{
               transform: "scale(1.4) rotate(360deg)",
               boxShadow: "0 0 5px rgba(0, 0, 0, 1)",

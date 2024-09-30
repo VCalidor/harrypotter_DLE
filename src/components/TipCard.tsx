@@ -1,39 +1,6 @@
-import {
-  Button,
-  Icon,
-  keyframes,
-  Text,
-  useToast,
-  VStack,
-} from "@chakra-ui/react";
+import { Button, Icon, Text, useToast, VStack } from "@chakra-ui/react";
 import { useState } from "react";
-
-const newTip = keyframes`
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
-  }`;
-
-const flipPart1 = keyframes`
-  0% {
-    transform: rotateY(0deg) scale(1);
-  }
-  100% {
-    transform: rotateY(-90deg) scale(1.2);
-  }`;
-
-const flipPart2 = keyframes`
-  0% {
-    transform: rotateY(-90deg) scale(1.2);
-  }
-  100% {
-    transform: rotateY(0deg) scale(1);
-  }`;
+import { flipPart1, flipPart2, newTip } from "../animations";
 
 const TipCard = ({
   selectedCharacters,
@@ -65,7 +32,8 @@ const TipCard = ({
       justifyContent={"center"}
       gap={2}
       _hover={{
-        transform: selectedCharacters.length > minTries || hit ? "scale(1.1)" : "",
+        transform:
+          selectedCharacters.length > minTries || hit ? "scale(1.1)" : "",
       }}
       onClick={() => {
         if (selectedCharacters.length > minTries || hit) {
