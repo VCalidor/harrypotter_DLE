@@ -211,6 +211,8 @@ const CharacterInput = ({
       borderRadius={4}
       transition={".4s"}
       animation={`${appear} .2s ease-in-out`}
+      backdropFilter="blur(2px)"
+      zIndex={1}
     >
       <HStack
         maxW={400}
@@ -286,7 +288,7 @@ const CharacterInput = ({
         <Flex
           position={"absolute"}
           flexDirection={"column"}
-          top={"3.7rem"}
+          top={"3.5rem"}
           width={"100%"}
           gap={".2rem"}
           maxHeight={200}
@@ -295,7 +297,6 @@ const CharacterInput = ({
           padding={".2rem"}
           opacity={isOpen ? 100 : 0}
           backgroundColor="rgb(11, 9, 13, .7)"
-          zIndex={99}
         >
           {charactersList()}
         </Flex>

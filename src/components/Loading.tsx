@@ -16,6 +16,7 @@ const Loading = ({
       rounded={"md"}
       maxW={"90%"}
       padding={"3rem"}
+      backdropFilter="blur(2px)"
     >
       {children}
       <VStack

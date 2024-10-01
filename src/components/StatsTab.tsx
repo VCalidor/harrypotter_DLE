@@ -82,6 +82,7 @@ const StatsTab = ({ isDaily, hit }: { isDaily: boolean; hit: boolean }) => {
       gap={"1rem"}
       backgroundColor="rgb(11, 9, 13, .7)"
       border={"1px solid rgb(51, 47, 64, .7)"}
+      backdropFilter="blur(2px)"
       padding={".5rem"}
       paddingX={"1rem"}
       paddingBottom={0}

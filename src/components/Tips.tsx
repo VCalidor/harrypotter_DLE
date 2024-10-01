@@ -30,6 +30,7 @@ const Tips = ({
       paddingY={"2rem"}
       gap={"1.5rem"}
       animation={`${appear} .2s ease-in-out`}
+      backdropFilter="blur(2px)"
     >
       <Text fontSize={"1.2rem"} textShadow="2px 2px 0 rgba(0, 0, 0, .7)">
         Adivinhe qual é o personagem{isDaily ? " de hoje" : ""}!

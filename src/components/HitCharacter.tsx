@@ -101,6 +101,7 @@ const HitCharacter = ({
       maxW={"90%"}
       padding={" clamp(0.6rem, 2.5vw, 2rem)"}
       animation={`${appear} .2s ease-in-out`}
+      backdropFilter="blur(2px)"
     >
       <IconButton
         position={"absolute"}

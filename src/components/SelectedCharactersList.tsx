@@ -49,6 +49,7 @@ const SelectedCharactersList = ({
       maxW={"90%"}
       backgroundColor="rgb(11, 9, 13, .7)"
       border={"1px solid rgb(51, 47, 64, .7)"}
+      backdropFilter="blur(2px)"
       overflowX={"auto"}
       rounded={"md"}
       overflowY={"hidden"}
