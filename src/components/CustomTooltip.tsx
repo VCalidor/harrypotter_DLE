@@ -1,12 +1,12 @@
 import {
   Box,
+  Heading,
   Icon,
   IconButton,
   Modal,
   ModalBody,
   ModalContent,
   ModalOverlay,
-  Text,
   Tooltip,
   useDisclosure,
   VStack,
@@ -85,9 +85,14 @@ const CustomTooltip = ({
                   cursor: "pointer",
                 }}
               />
-              <Text as={"h2"} fontSize={32}>
+              <Heading
+                fontSize={"xxx-large"}
+                letterSpacing=".03em"
+                textShadow="4px 4px 2px rgba(0, 0, 0, 1)"
+                textAlign="center"
+              >
                 {title}
-              </Text>
+              </Heading>
               {children}
             </VStack>
           </ModalBody>

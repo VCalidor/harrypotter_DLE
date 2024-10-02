@@ -1,4 +1,4 @@
-import { Box, Stack, Text } from "@chakra-ui/react";
+import { Box, Heading, Stack, Text } from "@chakra-ui/react";
 import CharacterImageCard from "./CharacterImageCard";
 import AtributeCard from "./AtributeCard";
 
@@ -157,9 +157,16 @@ const HowToPlayTooltip = () => {
 
   return (
     <Stack w={"100%"} textAlign={"left"}>
-      <Text as={"h3"} fontSize={26} w={"100%"} borderBottom={"solid 1px white"}>
+      <Heading
+        as={"h3"}
+        w={"100%"}
+        borderBottom={"solid 1px white"}
+        fontSize={"xx-large"}
+        letterSpacing=".06em"
+        textShadow="4px 4px 2px rgba(0, 0, 0, 1)"
+      >
         Atributos
-      </Text>
+      </Heading>
       <Stack paddingLeft={12} paddingTop={12}>
         {atributes.map((atribute) => atributesFunc(atribute))}
       </Stack>
