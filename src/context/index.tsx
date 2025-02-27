@@ -73,7 +73,8 @@ export const MyProvider = ({ children }: { children: React.ReactNode }) => {
 
     const parsedAllCharacters = JSON.parse(lsAllCharacters || "[]");
 
-    console.log(parsedAllCharacters);
+    console.log("allcharacter",parsedAllCharacters);
+    console.log("characters version",VITE_CHARACTERS_VERSION);
 
     if (parsedAllCharacters?.version === VITE_CHARACTERS_VERSION) {
       console.log("Using cached characters");
