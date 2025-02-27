@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 const API_URL = import.meta.env.VITE_API_URL;
+const VITE_CHARACTERS_VERSION = import.meta.env.VITE_CHARACTERS_VERSION;
 import { Character } from "../interfaces";
 import { decryptData } from "../utils";
 
@@ -23,19 +24,17 @@ export const MyProvider = ({ children }: { children: React.ReactNode }) => {
     );
     const dailyFire = JSON.parse(localStorage.getItem("dailyFire") || "[]");
     const dailyTries = JSON.parse(localStorage.getItem("dailyTries") || "[]");
+    const emojiTries = JSON.parse(localStorage.getItem("emojiTries") || "[]");
+    const emojiFire = JSON.parse(localStorage.getItem("emojiFire") || "[]");
     const lsAllCharacters = localStorage.getItem("allCharacters");
 
+    // classic
     if (dailyFire.length > 0) {
       const result = dailyFire.filter((d: { magic: string }) =>
         checkIfIsValid(d)
       );
+      
       localStorage.setItem("dailyFire", JSON.stringify(result));
-    }
-    if (infiniteFire.length > 0) {
-      const result = infiniteFire.filter((d: { magic: string }) =>
-        checkIfIsValid(d)
-      );
-      localStorage.setItem("infiniteFire", JSON.stringify(result));
     }
     if (dailyTries.length > 0 && typeof dailyTries[0].magic === "string") {
       const t = new Date();
@@ -47,8 +46,35 @@ export const MyProvider = ({ children }: { children: React.ReactNode }) => {
         localStorage.removeItem("dailyTries");
     }
 
-    if (lsAllCharacters) {
-      setAllCharacters(JSON.parse(lsAllCharacters));
+    // infinite
+    if (infiniteFire.length > 0) {
+      const result = infiniteFire.filter((d: { magic: string }) =>
+        checkIfIsValid(d)
+      );
+      localStorage.setItem("infiniteFire", JSON.stringify(result));
+    }
+
+    // emoji
+    if (emojiFire.length > 0) {
+      const result = emojiFire.filter((d: { magic: string }) =>
+        checkIfIsValid(d)
+      );
+      localStorage.setItem("emojiFire", JSON.stringify(result));
+    }
+    if (emojiTries.length > 0 && typeof emojiTries[0].magic === "string") {
+      const t = new Date();
+      t.setHours(t.getHours() - 2);
+      const today = t.toISOString().split("T")[0];
+
+      const decryptedMagic = decryptData(emojiTries[0].magic);
+      if (decryptedMagic !== today || checkIfIsValid(decryptedMagic))
+        localStorage.removeItem("emojiTries");
+    }
+
+    const parsedAllCharacters = JSON.parse(lsAllCharacters || "[]");
+
+    if (parsedAllCharacters?.version === VITE_CHARACTERS_VERSION) {
+      setAllCharacters(parsedAllCharacters.characters);
       setLoading(false);
     } else getAllCharacters();
   }, []);
@@ -63,10 +89,11 @@ export const MyProvider = ({ children }: { children: React.ReactNode }) => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const data: Character[] = await response.json();
+      const data: { characters: Character[]; version: string } =
+        await response.json();
 
       localStorage.setItem("allCharacters", JSON.stringify(data));
-      setAllCharacters(data);
+      setAllCharacters(data.characters);
     } catch (error) {
       console.error("Erro ao buscar os personagens:", error);
     } finally {

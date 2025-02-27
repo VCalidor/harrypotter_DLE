@@ -2,24 +2,24 @@ import { Button, HStack, Icon, Text, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 const API_URL = import.meta.env.VITE_API_URL;
 
-import CharacterInput from "../components/CharacterInput";
 import SelectedCharactersList from "../components/SelectedCharactersList";
 import StatsTab from "../components/StatsTab";
-import Tips from "../components/Tips";
+import Tips from "../components/classicChallenge/Tips";
 import { Character, YesterdayCharacter } from "../interfaces";
 import { useMyContext } from "../context";
 import PageLayout from "../components/PageLayout";
-import HitCharacterFullComponent from "../components/HitCharacterFullComponent";
 import Loading from "../components/Loading";
 import { formatDate } from "../utils";
 import { GrPowerReset } from "react-icons/gr";
 import { appear } from "../animations";
+import HitCharacterFullComponent from "../components/HitCharacterFullComponent";
+import CharacterInput from "../components/CharacterInput";
 
 const getRandomCharacter = (characters: Character[]) => {
   return characters[Math.floor(Math.random() * characters.length)];
 };
 
-const Challenges = ({ isDaily }: { isDaily: boolean }) => {
+const ClassicChallenges = ({ isDaily }: { isDaily: boolean }) => {
   const { allCharacters } = useMyContext();
   const [selectedCharacters, setSelectedCharacters] = useState<Character[]>([]);
   const [lastAddedCharacter, setLastAddedCharacter] =
@@ -69,9 +69,12 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
     );
     setLastAddedCharacter(dailyTries[0]?.character);
     try {
-      const response = await fetch(`${API_URL}api/characters/daily-character`, {
-        method: "GET",
-      });
+      const response = await fetch(
+        `${API_URL}api/characters/daily-character?type=status`,
+        {
+          method: "GET",
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -148,7 +151,10 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
 
   return (
     <PageLayout isHome={true}>
-      <StatsTab isDaily={isDaily} hit={hit || alreadyHit} />
+      <StatsTab
+        mode={isDaily ? "classic" : "infinite"}
+        hit={hit || alreadyHit}
+      />
       {!isDaily || isTodayCharacter ? (
         <>
           <Tips
@@ -166,7 +172,7 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
               setAnimate={setAnimate}
               setHit={setHit}
               chosenCharacter={chosenCharacter}
-              isDaily={isDaily}
+              mode={isDaily ? "daily" : "infinite"}
               postHit={postHit}
             />
           )}
@@ -182,6 +188,7 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
             lastAddedCharacter={lastAddedCharacter}
             selectedCharacters={selectedCharacters}
             animate={animate}
+            mode={"classic"}
           />
           {isDaily && (
             <HStack
@@ -225,6 +232,7 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
             alreadyHit={alreadyHit}
             hits={hits}
             isDaily={isDaily}
+            mode={isDaily ? "daily" : "infinite"}
             restartChallenge={restartChallenge}
             chosenCharacter={chosenCharacter}
             selectedCharacters={selectedCharacters}
@@ -282,4 +290,4 @@ const Challenges = ({ isDaily }: { isDaily: boolean }) => {
   );
 };
 
-export default Challenges;
+export default ClassicChallenges;

@@ -1,6 +1,6 @@
 import { Button, Icon, Text, useToast, VStack } from "@chakra-ui/react";
 import { useState } from "react";
-import { flipPart1, flipPart2, newTip } from "../animations";
+import { flipPart1, flipPart2, newTip } from "../../animations";
 
 const TipCard = ({
   selectedCharacters,

@@ -19,6 +19,11 @@ export interface Character {
   image: string;
 }
 
+export interface emojiCharacter extends Character {
+  emoji: string[];
+}
+
+
 export interface YesterdayCharacter {
   name: string;
   number: number;

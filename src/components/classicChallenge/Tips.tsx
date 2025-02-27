@@ -2,9 +2,9 @@ import { HStack, Text, VStack } from "@chakra-ui/react";
 import { IoSkull } from "react-icons/io5";
 import { FaWandSparkles } from "react-icons/fa6";
 
-import { Character } from "../interfaces";
+import { Character } from "../../interfaces";
 import TipCard from "./TipCard";
-import { appear } from "../animations";
+import { appear } from "../../animations";
 
 const Tips = ({
   selectedCharacters,

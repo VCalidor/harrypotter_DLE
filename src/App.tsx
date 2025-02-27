@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Challenges from "./pages/Challenges";
+import ClassicChallenges from "./pages/ClassicChallenges";
+import EmojiChallenge from "./pages/EmojiChallenge";
 import Home from "./pages/Home";
 
 const App = () => {
@@ -9,11 +10,15 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route
           path="/daily-challenge"
-          element={<Challenges isDaily={true} />}
+          element={<ClassicChallenges isDaily={true} />}
         />
         <Route
           path="/infinite-challenge"
-          element={<Challenges isDaily={false} />}
+          element={<ClassicChallenges isDaily={false} />}
+        />
+        <Route
+          path="/emoji-challenge"
+          element={<EmojiChallenge isDaily={true} />}
         />
       </Routes>
     </Router>

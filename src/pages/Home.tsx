@@ -4,6 +4,7 @@ import { IoInfiniteSharp } from "react-icons/io5";
 
 import { useNavigate } from "react-router-dom";
 import PageLayout from "../components/PageLayout";
+import { BsFillEmojiLaughingFill } from "react-icons/bs";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -30,6 +31,8 @@ const Home = () => {
             variant="buttonVariant"
             onClick={() => navigate("/daily-challenge")}
             position={"relative"}
+            flex={1}
+            minW={"180px"}
           >
             <Icon as={FaCalendarDays} boxSize={"1.8rem"} color={"#0B090D"} />
             <Icon
@@ -56,6 +59,8 @@ const Home = () => {
           <Button
             variant="buttonVariant"
             onClick={() => navigate("/infinite-challenge")}
+            flex={1}
+            minW={"180px"}
           >
             <Icon as={IoInfiniteSharp} boxSize={"2.8rem"} color={"#0B090D"} />
             <Icon
@@ -77,6 +82,38 @@ const Home = () => {
               fontSize="clamp(0.6rem, 2.5vw, 0.8rem)"
             >
               Desafio infinito
+            </Text>
+          </Button>
+          <Button
+            variant="buttonVariant"
+            onClick={() => navigate("/emoji-challenge")}
+            flex={1}
+            minW={"180px"}
+          >
+            <Icon
+              as={BsFillEmojiLaughingFill}
+              boxSize={"2.2rem"}
+              color={"#0B090D"}
+            />
+            <Icon
+              boxSize={"2.4rem"}
+              color={"#0B090D"}
+              as={BsFillEmojiLaughingFill}
+              position={"absolute"}
+              opacity={0.7}
+              filter="blur(2px)"
+            />
+            <Text
+              position={"absolute"}
+              bottom={".3rem"}
+              fontWeight={"bold"}
+              color={"#867F83"}
+              textShadow="1px 1px 0 #332F40"
+              textAlign="center"
+              whiteSpace="normal"
+              fontSize="clamp(0.6rem, 2.5vw, 0.8rem)"
+            >
+              Desafio Emoji
             </Text>
           </Button>
         </HStack>

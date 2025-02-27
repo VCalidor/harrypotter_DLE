@@ -1,5 +1,5 @@
 import { Box, Heading, Stack, Text } from "@chakra-ui/react";
-import CharacterImageCard from "./CharacterImageCard";
+import CharacterImageCard from "../CharacterImageCard";
 import AtributeCard from "./AtributeCard";
 
 const getCharacter = () => {

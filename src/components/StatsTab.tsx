@@ -4,7 +4,7 @@ import { AiFillFire } from "react-icons/ai";
 import { BsFillBarChartFill } from "react-icons/bs";
 import { decryptData } from "../utils";
 import CustomTooltip from "./CustomTooltip";
-import HowToPlayTooltip from "./HowToPlayTooltip";
+import HowToPlayTooltip from "./classicChallenge/HowToPlayTooltip";
 import { flaming } from "../animations";
 
 interface FireData {
@@ -16,25 +16,26 @@ interface FireData {
   magic: string;
 }
 
-const StatsTab = ({ isDaily, hit }: { isDaily: boolean; hit: boolean }) => {
+const keyMap = {
+  classic: "dailyFire",
+  infinite: "infiniteFire",
+  emoji: "emojiFire",
+};
+
+const StatsTab = ({
+  mode,
+  hit,
+}: {
+  mode: "classic" | "infinite" | "emoji";
+  hit: boolean;
+}) => {
   const [fire, setFire] = useState<FireData[]>([]);
 
   useEffect(() => {
-    const fi = JSON.parse(
-      localStorage.getItem(isDaily ? "dailyFire" : "infiniteFire") || "[]"
-    );
+    const fi = JSON.parse(localStorage.getItem(keyMap[mode]) || "[]");
 
-    if (isDaily) getDailyFire(fi);
-    else setFire(fi);
-  }, []);
-
-  useEffect(() => {
-    const fi = JSON.parse(
-      localStorage.getItem(isDaily ? "dailyFire" : "infiniteFire") || "[]"
-    );
-
-    if (isDaily) getDailyFire(fi);
-    else setFire(fi);
+    if (keyMap[mode] === "infiniteFire") setFire(fi);
+    else getDailyFire(fi);
   }, [hit]);
 
   const getDailyFire = (fi: FireData[]) => {

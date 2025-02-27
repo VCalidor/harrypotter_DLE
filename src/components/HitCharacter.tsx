@@ -48,7 +48,7 @@ const HitCharacter = ({
   hits: number;
   tries: number;
   isDaily: boolean;
-  restartChallenge: any;
+  restartChallenge?: () => void;
   isModal: boolean;
   onClose: any;
   onOpen: any;
@@ -163,14 +163,15 @@ const HitCharacter = ({
         </Text>
         <Text marginBottom={0}>Número de tentativas: {tries}</Text>
       </Box>
-      {isDaily ? (
+      {isDaily && (
         <Box>
           <Text fontSize={"1rem"}>Próximo personagem em aproximadamente:</Text>
           <Text fontSize={24} fontWeight={"bold"} fontFamily={"Harry P"}>
             {formatTime(time)}
           </Text>
         </Box>
-      ) : (
+      )}
+      {restartChallenge && !isDaily && (
         <Button
           variant="buttonVariant"
           onClick={() => {

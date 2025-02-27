@@ -14,6 +14,7 @@ const HitCharacterFullComponent = ({
   hit,
   alreadyHit,
   hits,
+  mode,
   isDaily,
   chosenCharacter,
   selectedCharacters,
@@ -22,10 +23,11 @@ const HitCharacterFullComponent = ({
   hit: boolean;
   alreadyHit: boolean;
   hits: number;
+  mode: "daily" | "infinite" | "emoji";
   isDaily: boolean;
   chosenCharacter: Character;
   selectedCharacters: Character[];
-  restartChallenge: any;
+  restartChallenge?: () => void;
 }) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
 
@@ -62,9 +64,9 @@ const HitCharacterFullComponent = ({
                   isModal={true}
                   chosenCharacter={chosenCharacter}
                   hits={
-                    isDaily
+                    mode === "daily" || mode === "emoji"
                       ? JSON.parse(
-                          localStorage.getItem("dailyFire") || "[{}]"
+                          localStorage.getItem(mode + "Fire") || "[{}]"
                         )[0]?.position || 0
                       : hits
                   }
@@ -83,14 +85,14 @@ const HitCharacterFullComponent = ({
               chosenCharacter={chosenCharacter}
               hits={
                 isDaily
-                  ? JSON.parse(localStorage.getItem("dailyFire") || "{}")[0]
+                  ? JSON.parse(localStorage.getItem(mode + "Fire") || "{}")[0]
                       .position
                   : hits
               }
               tries={selectedCharacters.length + 1}
               isDaily={isDaily}
-              restartChallenge={restartChallenge}
               width="40rem"
+              restartChallenge={restartChallenge}
             />
           )}
         </>

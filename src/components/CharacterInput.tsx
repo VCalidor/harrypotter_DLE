@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { BsSend } from "react-icons/bs";
 import { useMyContext } from "../context";
 
-import { Character } from "../interfaces";
+import { Character, emojiCharacter } from "../interfaces";
 import { encryptData } from "../utils";
 import { appear } from "../animations";
 
@@ -24,7 +24,7 @@ const CharacterInput = ({
   setAnimate,
   setHit,
   chosenCharacter,
-  isDaily,
+  mode,
   postHit,
 }: {
   selectedCharacters: Character[];
@@ -33,8 +33,8 @@ const CharacterInput = ({
   setLastAddedCharacter?: any;
   setAnimate: any;
   setHit: any;
-  chosenCharacter: Character;
-  isDaily: boolean;
+  chosenCharacter: emojiCharacter | Character;
+  mode: "daily" | "infinite" | "emoji";
   postHit: any;
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -49,8 +49,10 @@ const CharacterInput = ({
 
   useEffect(() => {
     let characters = allCharacters;
-    if (isDaily) {
-      const dailyTries = JSON.parse(localStorage.getItem("dailyTries") || "[]");
+    if (mode !== "infinite") {
+      const dailyTries = JSON.parse(
+        localStorage.getItem(mode + "Tries") || "[]"
+      );
 
       const dailyTriesNames = new Set(
         dailyTries.map((d: { character: Character }) => d.character.name)
@@ -95,9 +97,9 @@ const CharacterInput = ({
         setLastAddedCharacter(character);
         setAnimate(false);
 
-        if (isDaily) {
+        if (mode !== "infinite") {
           const dailyTries = JSON.parse(
-            localStorage.getItem("dailyTries") || "[]"
+            localStorage.getItem(mode + "Tries") || "[]"
           );
 
           const today = new Date();
@@ -108,44 +110,44 @@ const CharacterInput = ({
             magic: encryptData(today.toISOString().split("T")[0]),
           });
 
-          localStorage.setItem("dailyTries", JSON.stringify(dailyTries));
+          localStorage.setItem(mode + "Tries", JSON.stringify(dailyTries));
         }
 
-        setTimeout(async () => {
-          setIsLoading(false);
+        setTimeout(
+          async () => {
+            setIsLoading(false);
 
-          if (character.name === chosenCharacter.name) {
-            const fire: {
-              character: object;
-              magic: string;
-              position: string;
-            }[] = JSON.parse(
-              localStorage.getItem(isDaily ? "dailyFire" : "infiniteFire") ||
-                "[]"
-            );
+            if (character.name === chosenCharacter.name) {
+              const fire: {
+                character: object;
+                magic: string;
+                position: string;
+              }[] = JSON.parse(localStorage.getItem(mode + "Fire") || "[]");
 
-            const today = new Date();
-            today.setHours(today.getHours() - 2);
-            const position = await postHit();
+              const today = new Date();
+              today.setHours(today.getHours() - 2);
+              const position = await postHit();
 
-            fire.unshift({
-              character: {
-                name: character.name,
-                alternate_names: character.alternate_names,
-                image: character.image,
-              },
-              magic: encryptData(today.toISOString().split("T")[0]),
-              position,
-            });
+              console.log(today.toISOString().split("T")[0]);
 
-            localStorage.setItem(
-              isDaily ? "dailyFire" : "infiniteFire",
-              JSON.stringify(fire)
-            );
-            setHit(true);
-            setRemainingCharacters(allCharacters);
-          }
-        }, 4500);
+              fire.unshift({
+                character: {
+                  name: character.name,
+                  alternate_names: character.alternate_names,
+                  image: character.image,
+                },
+                magic: encryptData(today.toISOString().split("T")[0]),
+                position,
+              });
+              console.log(fire);
+
+              localStorage.setItem(mode + "Fire", JSON.stringify(fire));
+              setHit(true);
+              setRemainingCharacters(allCharacters);
+            }
+          },
+          mode === "infinite" || mode === "daily" ? 4500 : 2000
+        );
       }, 400);
       setInput("");
       onClose();

@@ -1,8 +1,8 @@
 import { HStack } from "@chakra-ui/react";
-import CharacterImageCard from "./CharacterImageCard";
+import CharacterImageCard from "../CharacterImageCard";
 
 import AtributeCard from "./AtributeCard";
-import { Character } from "../interfaces";
+import { Character } from "../../interfaces";
 
 const time = 0.7;
 
