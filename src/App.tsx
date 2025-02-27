@@ -18,7 +18,7 @@ const App = () => {
         />
         <Route
           path="/emoji-challenge"
-          element={<EmojiChallenge isDaily={true} />}
+          element={<EmojiChallenge />}
         />
       </Routes>
     </Router>
