@@ -128,8 +128,6 @@ const CharacterInput = ({
               today.setHours(today.getHours() - 2);
               const position = await postHit();
 
-              console.log(today.toISOString().split("T")[0]);
-
               fire.unshift({
                 character: {
                   name: character.name,
@@ -139,7 +137,6 @@ const CharacterInput = ({
                 magic: encryptData(today.toISOString().split("T")[0]),
                 position,
               });
-              console.log(fire);
 
               localStorage.setItem(mode + "Fire", JSON.stringify(fire));
               setHit(true);
